@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StileFrans - Tienda Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="stileCliente.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <i class="fas fa-tshirt"></i>
+                    <span>StileFrans</span>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Inicio</a></li>
+                    <li><a href="#">Mujer</a></li>
+                    <li><a href="#">Hombre</a></li>
+                    <li><a href="#">Niños</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+                
+                <div class="header-actions">
+                    <i class="fas fa-search"></i>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-bag" id="cart-icon"></i>
+                        <div class="cart-count">0</div>
+                    </div>
+                    <div class="user-info">
+                        <span>Hola, <strong>Cliente</strong></span>
+                        <button class="logout-btn" onclick="window.location.href='index.html'">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Nueva Colección Otoño/Invierno</h1>
+            <p>Descubre las últimas tendencias en moda con hasta 50% de descuento en productos seleccionados</p>
+            <a href="#products" class="btn">Ver Colección</a>
+        </div>
+    </section>
+
+    <!-- Store Section -->
+    <section class="store-section" id="products">
+        <div class="container">
+            <h2 class="section-title">Nuestros Productos</h2>
+            
+            <div class="categories-filter">
+                <div class="category-filter active" data-category="all">Todos</div>
+                <div class="category-filter" data-category="camisetas">Camisetas</div>
+                <div class="category-filter" data-category="pantalones">Pantalones</div>
+                <div class="category-filter" data-category="vestidos">Vestidos</div>
+                <div class="category-filter" data-category="accesorios">Accesorios</div>
+            </div>
+            
+            <div class="products-grid" id="products-grid">
+                <!-- Los productos se cargarán aquí dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="overlay" id="overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">Tu Carrito</h3>
+            <button class="close-cart" id="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Los items del carrito se agregarán aquí -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkout-btn">
+                Proceder al Pago
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>StyleFashion</h3>
+                    <p>Tu destino de moda online con las últimas tendencias y los mejores precios.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="#">Tienda</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Categorías</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Mujer</a></li>
+                        <li><a href="#">Hombre</a></li>
+                        <li><a href="#">Niños</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                        <li><a href="#">Ofertas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Lima</li>
+                        <li><i class="fas fa-phone"></i> +51 987 654 321</li>
+                        <li><i class="fas fa-envelope"></i> info@stylefashion.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 StyleFashion. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+   <script src="scriptCliente.js"></script>
+</body>
+</html>

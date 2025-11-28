@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUDITORÍA WEB - Plataforma de Videos Educativos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="stile.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <div class="logo-text">
+                    <h1>AUDITORÍA WEB</h1>
+                    <p>Plataforma de Videos Educativos</p>
+                </div>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#ejercicio1"><i class="fas fa-play"></i> Video Principal</a></li>
+                    <li><a href="#ejercicio2"><i class="fas fa-cc"></i> Con Subtítulos</a></li>
+                    <li><a href="#ejercicio4"><i class="fas fa-th"></i> Galería</a></li>
+                    <li><a href="#ejercicio5"><i class="fas fa-gamepad"></i> Controles</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Domina la Auditoría Web con Videos Interactivos</h2>
+            <p>Aprende técnicas avanzadas de seguridad web a través de videos educativos con controles personalizados y funcionalidades interactivas.</p>
+            <div class="format-buttons">
+                <a href="#ejercicio1" class="format-btn"><i class="fas fa-play-circle"></i> Ver Curso Principal</a>
+                <a href="#ejercicio4" class="format-btn"><i class="fas fa-th-large"></i> Explorar Galería</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Ejercicio 1 – Video Principal -->
+        <section id="ejercicio1">
+            <div class="section-title">
+                <h2><i class="fas fa-star"></i> Video Principal del Curso</h2>
+                <p>Video introductorio con portada personalizada y controles de formato</p>
+            </div>
+            
+            <div class="video-container">
+                <video id="video1" controls poster="FOTO.png" width="1000" height="563">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento video.
+                </video>
+                <div class="video-info">
+                    <h4>Introducción a la Auditoría Web - Módulo 1</h4>
+                    <div class="video-meta">
+                        <span><i class="fas fa-clock"></i> 10:25 min</span>
+                        <span><i class="fas fa-eye"></i> 2.4K vistas</span>
+                        <span><i class="fas fa-calendar"></i> Publicado: 15 Ene 2025</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="format-buttons">
+                <button class="format-btn" onclick="changeVideoFormat('mp4')">
+                    <i class="fas fa-file-video"></i> Formato MP4
+                </button>
+                <button class="format-btn" onclick="changeVideoFormat('webm')">
+                    <i class="fas fa-file-video"></i> Formato WebM
+                </button>
+                <button class="format-btn" onclick="changeVideoSize('small')">
+                    <i class="fas fa-compress"></i> Tamaño Pequeño
+                </button>
+                <button class="format-btn" onclick="changeVideoSize('medium')">
+                    <i class="fas fa-expand"></i> Tamaño Mediano
+                </button>
+                <button class="format-btn" onclick="changeVideoSize('large')">
+                    <i class="fas fa-maximize"></i> Tamaño Grande
+                </button>
+            </div>
+        </section>
+        
+        <!-- Ejercicio 2 – Video con subtítulos -->
+        <section id="ejercicio2">
+            <div class="section-title">
+                <h2><i class="fas fa-closed-captioning"></i> Videos con Subtítulos</h2>
+                <p>Aprende con subtítulos en múltiples idiomas y controles avanzados</p>
+            </div>
+            
+            <div class="subtitle-container">
+                <div class="banner">
+                    <i class="fas fa-globe"></i> AUDITORÍA WEB - Seguridad Avanzada (Subtítulos Disponibles)
+                </div>
+                <video id="subtitle-video" controls width="1000" height="563">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+                    <track label="Español" kind="subtitles" srclang="es" src="https://raw.githubusercontent.com/AlexxSub/vtt-example/main/subs_es.vtt" default>
+                    <track label="English" kind="subtitles" srclang="en" src="https://raw.githubusercontent.com/AlexxSub/vtt-example/main/subs_en.vtt">
+                    Tu navegador no soporta el elemento video.
+                </video>
+            </div>
+            
+            <div class="subtitle-controls">
+                <button id="toggle-subtitles" class="control-btn success" style="width: auto; padding: 0 1.5rem;">
+                    <i class="fas fa-cc"></i> Alternar Subtítulos
+                </button>
+                <button id="change-language" class="control-btn" style="width: auto; padding: 0 1.5rem;">
+                    <i class="fas fa-language"></i> Cambiar Idioma
+                </button>
+                <button id="download-subtitles" class="control-btn secondary" style="width: auto; padding: 0 1.5rem;">
+                    <i class="fas fa-download"></i> Descargar Subtítulos
+                </button>
+            </div>
+        </section>
+        
+        <!-- Ejercicio 3 – Video en bucle como fondo -->
+        <section id="ejercicio3">
+            <div class="section-title">
+                <h2><i class="fas fa-sync-alt"></i> Experiencia Inmersiva</h2>
+                <p>Videos de fondo con contenido superpuesto para una experiencia de aprendizaje única</p>
+            </div>
+            
+            <div class="video-background">
+                <video class="background-video" autoplay loop muted>
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                </video>
+                <div class="overlay-text">
+                    <h4 id="saludo">¡BIENVENIDO A AUDITORÍA WEB!</h4>
+                    <p style="font-size: 1.2rem; margin-bottom: 1rem;">Transforma tu conocimiento en seguridad web con nuestra plataforma educativa</p>
+                    <p style="color: var(--accent); font-weight: 600;">El mensaje se adapta automáticamente según la hora del día para una experiencia personalizada</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Ejercicio 4 – Galería de videos expandida -->
+        <section id="ejercicio4">
+            <div class="section-title">
+                <h2><i class="fas fa-th-large"></i> Galería de Cursos</h2>
+                <p>Explora nuestra completa biblioteca de videos educativos sobre auditoría web</p>
+            </div>
+            
+            <div class="gallery">
+                <!-- Módulo 1 -->
+                <div class="gallery-item">
+                    <video controls poster="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-duration">12:45</div>
+                    <div class="video-title">Módulo 1: Fundamentos de Auditoría Web</div>
+                </div>
+                
+                <!-- Módulo 2 -->
+                <div class="gallery-item">
+                    <video controls poster="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-duration">18:30</div>
+                    <div class="video-title">Módulo 2: Herramientas de Análisis</div>
+                </div>
+                
+                <!-- Módulo 3 -->
+                <div class="gallery-item">
+                    <video controls poster="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-duration">15:20</div>
+                    <div class="video-title">Módulo 3: Técnicas de Escaneo</div>
+                </div>
+                
+                <!-- Módulo 4 -->
+                <div class="gallery-item">
+                    <video controls poster="https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-duration">22:15</div>
+                    <div class="video-title">Módulo 4: Análisis de Vulnerabilidades</div>
+                </div>
+                
+                <!-- Módulo 5 -->
+                <div class="gallery-item">
+                    <video controls poster="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-duration">25:40</div>
+                    <div class="video-title">Módulo 5: Informes Profesionales</div>
+                </div>
+                
+                <!-- Módulo 6 -->
+                <div class="gallery-item">
+                    <video controls poster="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-duration">19:55</div>
+                    <div class="video-title">Módulo 6: Casos de Estudio Reales</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Ejercicio 5 – Controles personalizados -->
+        <section id="ejercicio5">
+            <div class="section-title">
+                <h2><i class="fas fa-gamepad"></i> Controles Avanzados</h2>
+                <p>Experimenta con controles personalizados para una experiencia de visualización única</p>
+            </div>
+            
+            <div class="custom-controls-container">
+                <video id="custom-video" width="1000" height="563">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" type="video/mp4">
+                </video>
+                
+                <div class="custom-controls">
+                    <div class="control-group">
+                        <button class="control-btn" id="play-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn" id="pause-btn">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button class="control-btn warning" id="stop-btn">
+                            <i class="fas fa-stop"></i>
+                        </button>
+                        <button class="control-btn" id="rewind-btn">
+                            <i class="fas fa-backward"></i>
+                        </button>
+                        <button class="control-btn" id="forward-btn">
+                            <i class="fas fa-forward"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="time-display" id="current-time">00:00</div>
+                        <div class="progress-bar" id="progress-bar">
+                            <div class="progress" id="progress"></div>
+                        </div>
+                        <div class="time-display" id="duration">00:00</div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <button class="control-btn danger" id="mute-btn">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <div class="volume-control">
+                            <input type="range" min="0" max="100" value="100" class="volume-slider" id="volume-slider">
+                        </div>
+                        <div class="speed-control">
+                            <button class="speed-btn active" data-speed="0.5">0.5x</button>
+                            <button class="speed-btn" data-speed="1">1x</button>
+                            <button class="speed-btn" data-speed="1.5">1.5x</button>
+                            <button class="speed-btn" data-speed="2">2x</button>
+                        </div>
+                        <button class="control-btn success" id="fullscreen-btn">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                        <button class="control-btn secondary" id="pip-btn">
+                            <i class="fas fa-clone"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-shield-alt"></i> AUDITORÍA WEB</h4>
+                <p>Plataforma educativa especializada en seguridad web y técnicas de auditoría mediante videos interactivos y contenido de calidad.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Enlaces Rápidos</h4>
+                <ul class="footer-links">
+                    <li><a href="#ejercicio1"><i class="fas fa-play"></i> Curso Principal</a></li>
+                    <li><a href="#ejercicio2"><i class="fas fa-cc"></i> Videos con Subtítulos</a></li>
+                    <li><a href="#ejercicio4"><i class="fas fa-th-large"></i> Galería de Cursos</a></li>
+                    <li><a href="#ejercicio5"><i class="fas fa-gamepad"></i> Controles Avanzados</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-book"></i> Documentación</a></li>
+                    <li><a href="#"><i class="fas fa-tools"></i> Herramientas</a></li>
+                    <li><a href="#"><i class="fas fa-file-download"></i> Descargas</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Soporte</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> bratcollazos123@gmail.com</li>
+                    <li><i class="fas fa-phone"></i> +51 900 777 611</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Lima, Perú</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 AUDITORÍA WEB - Plataforma de Videos Educativos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

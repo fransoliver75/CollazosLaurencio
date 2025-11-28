@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Formularios Frans</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Formularios Empresariales</h1>
+  <nav>
+    <a href="#" onclick="mostrar('contacto')">Contacto</a>
+    <a href="#" onclick="mostrar('registro')">Registro</a>
+    <a href="#" onclick="mostrar('servicio')">Servicio</a>
+    <a href="#" onclick="mostrar('finanzas')">Contabilidad</a>
+    <a href="#" onclick="mostrar('rrhh')">Recursos Humanos</a>
+    <a href="#" onclick="mostrar('producto')">Producto</a>
+    <a href="#" onclick="mostrar('calidad')">Operativos</a>
+  </nav>
+</header>
+
+<div class="container">
+  <!-- Contacto -->
+  <form id="contacto" class="formulario">
+    <h2>Formulario de Contacto</h2>
+    <label>Nombre<input name="nombre" required></label>
+    <label>Email<input type="email" name="email" required></label>
+    <label>Teléfono<input name="telefono"></label>
+    <label>Mensaje<textarea name="mensaje"></textarea></label>
+    <div class="botones">
+      <button class="primary" type="submit">Enviar</button>
+      <button type="button" class="secondary" onclick="limpiar(this.form)">Limpiar</button>
+      <button type="button" onclick="exportar(this.form)">Exportar CSV</button>
+    </div>
+  </form>
+
+  <!-- Registro -->
+  <form id="registro" class="formulario hidden">
+    <h2>Formulario de Registro</h2>
+    <label>Nombre<input name="nombre" required></label>
+    <label>Email<input type="email" name="email" required></label>
+    <label>Contraseña<input type="password" name="clave" required></label>
+    <div class="botones">
+      <button class="primary" type="submit">Enviar</button>
+      <button type="button" class="secondary" onclick="limpiar(this.form)">Limpiar</button>
+      <button type="button" onclick="exportar(this.form)">Exportar CSV</button>
+    </div>
+  </form>
+
+  <!-- Servicio -->
+  <form id="servicio" class="formulario hidden">
+    <h2>Formulario de Servicio</h2>
+    <label>N° Pedido<input name="pedido" required></label>
+    <label>Descripción<textarea name="problema" required></textarea></label>
+    <div class="botones">
+      <button class="primary" type="submit">Enviar</button>
+      <button type="button" class="secondary" onclick="limpiar(this.form)">Limpiar</button>
+      <button type="button" onclick="exportar(this.form)">Exportar CSV</button>
+    </div>
+  </form>
+
+  <!-- Finanzas -->
+  <form id="finanzas" class="formulario hidden">
+    <h2>Formulario de Contabilidad</h2>
+    <label>Tipo<select name="tipo">
+      <option>Orden de compra</option>
+      <option>Factura</option>
+      <option>Reembolso</option>
+    </select></label>
+    <label>Monto<input type="number" name="monto" required></label>
+    <label>Detalle<textarea name="detalle"></textarea></label>
+    <div class="botones">
+      <button class="primary" type="submit">Enviar</button>
+      <button type="button" class="secondary" onclick="limpiar(this.form)">Limpiar</button>
+      <button type="button" onclick="exportar(this.form)">Exportar CSV</button>
+    </div>
+  </form>
+
+  <!-- RRHH -->
+  <form id="rrhh" class="formulario hidden">
+    <h2>Formulario de RRHH</h2>
+    <label>Tipo<select name="tipo">
+      <option>Vacaciones</option>
+      <option>Cambio de puesto</option>
+      <option>Horas extra</option>
+    </select></label>
+    <label>Empleado<input name="empleado" required></label>
+    <label>Detalle<textarea name="detalle"></textarea></label>
+    <div class="botones">
+      <button class="primary" type="submit">Enviar</button>
+      <button type="button" class="secondary" onclick="limpiar(this.form)">Limpiar</button>
+      <button type="button" onclick="exportar(this.form)">Exportar CSV</button>
+    </div>
+  </form>
+
+  <!-- Producto -->
+  <form id="producto" class="formulario hidden">
+    <h2>Formulario de Producto</h2>
+    <label>Tipo<select name="tipo">
+      <option>Defecto</option>
+      <option>Solicitud de cambio</option>
+      <option>Mejora</option>
+    </select></label>
+    <label>Descripción<textarea name="descripcion" required></textarea></label>
+    <div class="botones">
+      <button class="primary" type="submit">Enviar</button>
+      <button type="button" class="secondary" onclick="limpiar(this.form)">Limpiar</button>
+      <button type="button" onclick="exportar(this.form)">Exportar CSV</button>
+    </div>
+  </form>
+
+  <!-- Calidad -->
+  <form id="calidad" class="formulario hidden">
+    <h2>Formulario de Operativos</h2>
+    <label>Tipo<select name="tipo">
+      <option>Certificación</option>
+      <option>Inspección</option>
+      <option>Documento</option>
+    </select></label>
+    <label>Detalle<textarea name="detalle" required></textarea></label>
+    <div class="botones">
+      <button class="primary" type="submit">Enviar</button>
+      <button type="button" class="secondary" onclick="limpiar(this.form)">Limpiar</button>
+      <button type="button" onclick="exportar(this.form)">Exportar CSV</button>
+    </div>
+  </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

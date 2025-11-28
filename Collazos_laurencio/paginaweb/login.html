@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - No Hay Suerte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body{
+      margin:0;
+      font-family:"Montserrat", sans-serif;
+      background:linear-gradient(to bottom,#2a0055,#5b008a);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      color:#fff;
+    }
+
+    /* ===== HEADER MENU IGUAL QUE INDEX ===== */
+    header{
+      position:fixed;
+      top:20px; left:0; right:0;
+      display:flex;
+      justify-content:flex-end; 
+      align-items:center;
+      z-index:100;
+    }
+    .logo{
+      position:absolute;
+      top:0; left:20px;
+      transform:rotate(-18deg);
+      z-index:120;
+    }
+    .logo img{height:60px;}
+    nav{
+      margin-right:200px; 
+      margin-top:10px;    
+    }
+    nav ul{
+      display:flex;
+      list-style:none;
+      background:#fff;
+      border-radius:30px;
+      padding:6px 16px;
+      gap:15px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    }
+    nav ul li a{
+      text-decoration:none;
+      color:#111;
+      font-weight:600;
+      font-size:13px;
+      padding:6px 12px;
+      border-radius:12px;
+      transition:0.2s;
+    }
+    nav ul li a.active{
+      background:linear-gradient(90deg,#e3ccff,#f5eaff);
+      color:#6b2cc5;
+    }
+    .btn-login{
+      position:absolute;
+      right:30px;
+      top:20px;
+      padding:12px 26px;
+      border-radius:30px;
+      background:linear-gradient(90deg,#9fffd6,#cfa7ff);
+      color:#6b2cc5;
+      font-weight:700;
+      font-size:15px;
+      text-decoration:none;
+      box-shadow:0 4px 12px rgba(0,0,0,0.25);
+    }
+
+    /* ===== CONTENIDO LOGIN ===== */
+    .login-container{
+      flex:1;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:150px 80px 50px; /* espacio por header fijo */
+    }
+    .login-card{
+      background:#fff;
+      border-radius:15px;
+      padding:30px;
+      width:380px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.25);
+      color:#333;
+    }
+    .login-card .welcome{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#f7f3ff;
+      padding:10px 15px;
+      border-radius:10px;
+      margin-bottom:25px;
+    }
+    .welcome img{
+      width:45px;
+      height:45px;
+      border-radius:50%;
+      object-fit:cover;
+    }
+    .welcome h2{
+      font-size:18px;
+      color:#9d3dfc;
+    }
+    .login-card label{
+      display:block;
+      font-size:14px;
+      font-weight:bold;
+      color:#444;
+      margin:8px 0 5px;
+    }
+    .login-card input{
+      width:100%;
+      padding:14px;
+      margin-bottom:10px;
+      border-radius:8px;
+      border:1px solid #ddd;
+      font-size:14px;
+    }
+    .password-field{position:relative;}
+    .password-field input{padding-right:40px;}
+    .toggle-pass{
+      position:absolute;
+      top:50%; right:12px;
+      transform:translateY(-50%);
+      cursor:pointer;
+      font-size:14px;
+      color:#666;
+    }
+    .login-card .link{
+      display:block;
+      font-size:13px;
+      text-align:right;
+      color:#7c3aed;
+      margin-bottom:20px;
+      text-decoration:none;
+    }
+    .btn-main{
+      background:linear-gradient(90deg,#9fffd6,#cfa7ff);
+      border:none;
+      width:100%;
+      padding:14px;
+      border-radius:30px;
+      font-weight:700;
+      color:#3b0066;
+      cursor:pointer;
+      margin-bottom:15px;
+    }
+    .divider{
+      text-align:center;
+      margin:10px 0;
+      font-size:14px;
+      color:#888;
+    }
+    .btn-google{
+      width:100%;
+      padding:12px;
+      border-radius:30px;
+      border:1px solid #ddd;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      cursor:pointer;
+      font-weight:600;
+      margin-bottom:15px;
+    }
+    .btn-google img{width:20px; height:20px;}
+    .signup{text-align:center;font-size:14px;}
+    .btn-signup{
+      margin-left:5px;
+      color:#9d3dfc;
+      font-weight:bold;
+      text-decoration:none;
+    }
+
+    /* IMAGEN DERECHA */
+    .login-image{
+      flex:1;
+      display:flex;
+      justify-content:center;
+    }
+    .login-image img{
+      max-width:500px;
+      border-radius:15px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="imagen.jpg" alt="Logo">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="premios.html">Premios</a></li>
+      <li><a href="#">Ganadores</a></li>
+      <li><a href="#">Beneficios</a></li>
+      <li><a href="#">¿Cómo funciona?</a></li>
+      <li><a href="#">Suscripción</a></li>
+    </ul>
+  </nav>
+  <a href="#" class="btn-login">Iniciar sesión</a>
+</header>
+
+<!-- CONTENIDO -->
+<div class="login-container">
+  <!-- FORMULARIO -->
+  <div class="login-card">
+    <div class="welcome">
+      <img src="perfil.jpg" alt="Avatar">
+      <h2>Bienvenido Hermanito</h2>
+    </div>
+    <form>
+      <label>Escribe tu correo electrónico</label>
+      <input type="email" placeholder="ejemplo@correo.com">
+
+      <label>Escribe tu contraseña</label>
+      <div class="password-field">
+        <input type="password" id="password" placeholder="********">
+        <span class="toggle-pass" onclick="togglePassword()">👁️</span>
+      </div>
+
+      <a href="#" class="link">Recuperar contraseña</a>
+
+      <button type="submit" class="btn-main">Continuar →</button>
+      <div class="divider">ó</div>
+      <button type="button" class="btn-google">
+        <img src="google-icon.png" alt="Google"> Iniciar sesión con Google
+      </button>
+    </form>
+    <p class="signup">¿No tienes una cuenta?
+      <a href="#" class="btn-signup">Suscríbete</a>
+    </p>
+  </div>
+
+  <!-- IMAGEN DERECHA -->
+  <div class="login-image">
+    <img src="portada.jpg" alt="Personaje">
+  </div>
+</div>
+
+<script>
+  function togglePassword(){
+    const pass = document.getElementById("password");
+    pass.type = pass.type === "password" ? "text" : "password";
+  }
+</script>
+</body>
+</html>

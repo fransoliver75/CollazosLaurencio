@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16 GOLPES: Crónica de una Mente en Construcción</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ESTILO ÚNICO Y ATREVIDO - EL CAOS ORDENADO MEJORADO */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Caveat:wght@400;700&family=Rajdhani:wght@400;600;700&family=Exo+2:wght@400;600;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-cyan: #00ffff;
+            --neon-yellow: #ffff00;
+            --neon-green: #00ff00;
+            --dark-bg: #000000;
+            --card-bg: #0a0a0a;
+        }
+        
+        body {
+            background: var(--dark-bg);
+            color: var(--neon-cyan);
+            font-family: 'Exo 2', sans-serif;
+            padding: 30px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 0, 0.05) 0%, transparent 20%);
+            background-size: 100% 100%;
+            min-height: 100vh;
+            font-size: 18px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            border: 4px solid var(--neon-pink);
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.95);
+            position: relative;
+            box-shadow: 
+                0 0 80px var(--neon-pink),
+                inset 0 0 50px rgba(255, 0, 255, 0.1);
+            animation: containerGlow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes containerGlow {
+            0% {
+                box-shadow: 
+                    0 0 80px var(--neon-pink),
+                    inset 0 0 50px rgba(255, 0, 255, 0.1);
+            }
+            100% {
+                box-shadow: 
+                    0 0 100px var(--neon-cyan),
+                    inset 0 0 50px rgba(0, 255, 255, 0.1);
+            }
+        }
+        
+        /* SECCIÓN DE PERFIL CON FOTO Y NOMBRE */
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border-radius: 20px;
+            border: 2px solid var(--neon-cyan);
+            position: relative;
+            overflow: hidden;
+            animation: profilePulse 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes profilePulse {
+            0% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 40px rgba(255, 0, 255, 0.4);
+            }
+        }
+        
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--neon-yellow);
+            object-fit: cover;
+            box-shadow: 
+                0 0 20px var(--neon-yellow),
+                0 0 40px rgba(255, 255, 0, 0.3);
+            animation: photoGlow 3s ease-in-out infinite alternate;
+            transition: all 0.4s ease;
+        }
+        
+        @keyframes photoGlow {
+            0% {
+                box-shadow: 
+                    0 0 20px var(--neon-yellow),
+                    0 0 40px rgba(255, 255, 0, 0.3);
+            }
+            100% {
+                box-shadow: 
+                    0 0 30px var(--neon-yellow),
+                    0 0 60px rgba(255, 255, 0, 0.5);
+            }
+        }
+        
+        .profile-photo:hover {
+            transform: scale(1.05) rotate(5deg);
+            border-color: var(--neon-pink);
+        }
+        
+        .profile-info {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .profile-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 3em;
+            color: var(--neon-pink);
+            text-shadow: 
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-pink);
+            margin-bottom: 10px;
+            animation: nameGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes nameGlow {
+            0% {
+                text-shadow: 
+                    0 0 10px var(--neon-pink),
+                    0 0 20px var(--neon-pink);
+            }
+            100% {
+                text-shadow: 
+                    0 0 15px var(--neon-pink),
+                    0 0 30px var(--neon-pink),
+                    0 0 45px var(--neon-pink);
+            }
+        }
+        
+        .profile-title {
+            font-size: 1.8em;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+            margin-bottom: 15px;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 600;
+        }
+        
+        .profile-description {
+            font-size: 1.2em;
+            color: #eeeeee;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* Elementos de estilo "garabato" mejorados */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border: 3px solid var(--neon-yellow);
+            z-index: -1;
+            animation: borderPulse 3s infinite alternate;
+        }
+        
+        @keyframes borderPulse {
+            0% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.02);
+            }
+        }
+        
+        .graffiti {
+            position: absolute;
+            font-size: 2.2em;
+            transform: rotate(-15deg);
+            color: var(--neon-yellow);
+            font-weight: bold;
+            font-family: 'Caveat', cursive;
+            text-shadow: 2px 2px 0px #000, 0 0 10px var(--neon-yellow);
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(-15deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(-12deg);
+            }
+        }
+        
+        .graffiti-1 { top: 8%; left: 4%; animation-delay: 0s; }
+        .graffiti-2 { top: 85%; right: 6%; transform: rotate(12deg); animation-delay: 2s; }
+        .graffiti-3 { top: 45%; left: 92%; transform: rotate(25deg); animation-delay: 4s; }
+        
+        /* Título principal mejorado */
+        .main-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 5.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--neon-pink);
+            text-shadow: 
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-pink),
+                0 0 30px var(--neon-pink),
+                0 0 40px var(--neon-pink);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            border-bottom: 3px dashed var(--neon-cyan);
+            padding-bottom: 25px;
+            position: relative;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 
+                    0 0 10px var(--neon-pink),
+                    0 0 20px var(--neon-pink),
+                    0 0 30px var(--neon-pink);
+            }
+            100% {
+                text-shadow: 
+                    0 0 15px var(--neon-pink),
+                    0 0 30px var(--neon-pink),
+                    0 0 45px var(--neon-pink),
+                    0 0 60px var(--neon-pink);
+            }
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: var(--neon-yellow);
+            font-style: italic;
+            font-family: 'Caveat', cursive;
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+            animation: subtitlePulse 3s infinite alternate;
+        }
+        
+        @keyframes subtitlePulse {
+            0% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.02);
+            }
+        }
+        
+        /* Sección MIS PROYECTOS mejorada */
+        .my-projects-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5em;
+            text-align: center;
+            color: var(--neon-cyan);
+            margin: 50px 0 40px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px var(--neon-cyan);
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 15px;
+            border: 2px solid var(--neon-cyan);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .my-projects-title::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        /* Grid de proyectos mejorado */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+            border: 3px solid var(--neon-cyan);
+            padding: 35px;
+            position: relative;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4);
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), var(--neon-yellow));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-12px) rotate(1deg);
+            box-shadow: 
+                0 20px 40px rgba(255, 0, 255, 0.6),
+                0 0 80px rgba(0, 255, 255, 0.4);
+            border-color: var(--neon-pink);
+            z-index: 10;
+        }
+        
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .project-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3em;
+            color: var(--neon-yellow);
+            background: #000;
+            padding: 8px 15px;
+            border: 2px solid var(--neon-yellow);
+            position: absolute;
+            top: -20px;
+            left: 25px;
+            text-shadow: 0 0 10px var(--neon-yellow);
+            z-index: 2;
+            animation: numberPulse 2s infinite alternate;
+        }
+        
+        @keyframes numberPulse {
+            0% {
+                box-shadow: 0 0 5px var(--neon-yellow);
+            }
+            100% {
+                box-shadow: 0 0 15px var(--neon-yellow);
+            }
+        }
+        
+        .project-title-hacker {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8em;
+            color: var(--neon-pink);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--neon-pink);
+            font-weight: 700;
+        }
+        
+        .project-title-creative {
+            font-size: 2.2em;
+            color: var(--neon-cyan);
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-family: 'Exo 2', sans-serif;
+            text-shadow: 0 0 10px var(--neon-cyan);
+            line-height: 1.2;
+            font-weight: 800;
+        }
+        
+        .project-description {
+            color: #eeeeee;
+            font-size: 1.3em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 400;
+        }
+        
+        /* BOTÓN MEJORADO CON ANIMACIÓN ATREVIDA */
+        .project-action {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .action-btn {
+            display: inline-block;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #000;
+            background: linear-gradient(45deg, var(--neon-yellow), var(--neon-green));
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 5px 15px rgba(255, 255, 0, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            z-index: 1;
+            text-decoration: none;
+        }
+        
+        .action-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 8px 25px rgba(255, 255, 0, 0.6),
+                0 0 30px rgba(0, 255, 0, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        
+        .action-btn:hover::before {
+            left: 100%;
+        }
+        
+        .action-btn:active {
+            transform: translateY(1px) scale(0.98);
+        }
+        
+        .action-btn i {
+            margin-right: 8px;
+            animation: buttonIcon 1.5s infinite alternate;
+        }
+        
+        @keyframes buttonIcon {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.2);
+            }
+        }
+        
+        /* Notas adhesivas más grandes con animación */
+        .sticky-note {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, var(--neon-yellow), #ffd700);
+            transform: rotate(5deg);
+            color: #000;
+            padding: 20px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.6em;
+            font-weight: bold;
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.4);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            animation: noteFloat 8s ease-in-out infinite;
+            border-radius: 5px;
+        }
+        
+        @keyframes noteFloat {
+            0%, 100% {
+                transform: rotate(5deg) translateY(0);
+            }
+            50% {
+                transform: rotate(3deg) translateY(-10px);
+            }
+        }
+        
+        .note-1 { top: 80px; right: 80px; animation-delay: 0s; }
+        .note-2 { bottom: 120px; left: 50px; animation-delay: 2s; }
+        
+        /* Efectos de neón mejorados */
+        .neon-text {
+            text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+        }
+        
+        /* Footer mejorado */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            border-top: 2px dashed var(--neon-pink);
+            font-size: 1.4em;
+            color: var(--neon-yellow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 0, 0.05), transparent);
+            animation: footerShine 6s infinite linear;
+        }
+        
+        @keyframes footerShine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        /* Efectos de partículas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            animation: particleFloat 20s infinite linear;
+            opacity: 0.7;
+        }
+        
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive mejorado */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                font-size: 16px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .profile-section {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .profile-name {
+                font-size: 2.2em;
+            }
+            
+            .profile-title {
+                font-size: 1.4em;
+            }
+            
+            .main-title {
+                font-size: 3em;
+            }
+            
+            .my-projects-title {
+                font-size: 2.2em;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .project-card {
+                padding: 25px;
+                min-height: 280px;
+            }
+            
+            .sticky-note, .graffiti {
+                display: none;
+            }
+            
+            .project-title-creative {
+                font-size: 1.8em;
+            }
+            
+            .project-description {
+                font-size: 1.1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.2em;
+            }
+            
+            .my-projects-title {
+                font-size: 1.8em;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-card {
+                min-height: 300px;
+            }
+            
+            .profile-name {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <!-- Elementos de estilo graffiti -->
+        <div class="graffiti graffiti-1">¡REVOLUCIÓN!</div>
+        <div class="graffiti graffiti-2">SIN CENSURA</div>
+        <div class="graffiti graffiti-3">CODE & CREATE</div>
+        
+      
+        
+        <!-- SECCIÓN DE PERFIL CON FOTO Y NOMBRE -->
+        <div class="profile-section">
+            <img src="perfil.jpg" alt="Frans Oliver Collazos Laurencio" class="profile-photo" id="profilePhoto">
+            <div class="profile-info">
+                <h1 class="profile-name">FRANS OLIVER COLLAZOS LAURENCIO</h1>
+                <p class="profile-title">Desarrollador Web Full Stack</p>
+                <p class="profile-description">
+                    Apasionado por el código, el diseño y la innovación. 
+                    Creando experiencias digitales únicas que combinan funcionalidad 
+                    y estética con un toque de creatividad disruptiva.
+                </p>
+            </div>
+        </div>
+        
+        <h2 class="subtitle">Crónica de una Mente en Construcción</h2>
+        
+        <!-- Sección MIS PROYECTOS -->
+        <div class="my-projects-title neon-text">
+            MIS PROYECTOS
+        </div>
+        
+        <div class="projects-grid">
+            <!-- Proyecto 1 -->
+            <div class="project-card">
+                <div class="project-number">01/16</div>
+                <div class="project-title-hacker">CALCULADORA CIENTIFICA</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Una calculadora científica avanzada con funciones matemáticas complejas y una interfaz moderna y atractiva.</div>
+                <div class="project-action">
+                    <a href="CalculadoraCientifica/calculadora.html" target="_blank" class="action-btn">
+                        <i class="fas fa-calculator"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 2 -->
+            <div class="project-card">
+                <div class="project-number">02/16</div>
+                <div class="project-title-hacker">VIDEOS CON SUBTITULOS</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Plataforma para visualizar videos con subtítulos personalizados y diseño de portadas atractivas.</div>
+                <div class="project-action">
+                    <a href="CollazosVideos/collazos.html" target="_blank" class="action-btn">
+                        <i class="fas fa-video"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 3 -->
+            <div class="project-card">
+                <div class="project-number">03/16</div>
+                <div class="project-title-hacker">REGISTRO CON IMC</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Sistema de registro de usuarios con cálculo automático del Índice de Masa Corporal y estadísticas.</div>
+                <div class="project-action">
+                    <a href="Eventos/eventos.html" target="_blank" class="action-btn">
+                        <i class="fas fa-heartbeat"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 4 -->
+            <div class="project-card">
+                <div class="project-number">04/16</div>
+                <div class="project-title-hacker">FORMULARIOS INTERACTIVOS</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Colección de formularios interactivos con validación avanzada y captura de datos eficiente.</div>
+                <div class="project-action">
+                    <a href="formulario/capturas.html" target="_blank" class="action-btn">
+                        <i class="fas fa-edit"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 5 -->
+            <div class="project-card">
+                <div class="project-number">05/16</div>
+                <div class="project-title-hacker">FUT PERSONALIZADO</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Formulario Único Tributario con diseño moderno y funcionalidades avanzadas para declaraciones.</div>
+                <div class="project-action">
+                    <a href="FutPersonalisado/fut.html" target="_blank" class="action-btn">
+                        <i class="fas fa-file-invoice"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 6 -->
+            <div class="project-card">
+                <div class="project-number">06/16</div>
+                <div class="project-title-hacker">EL CHAVO DEL 8</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Tributo interactivo a la serie clásica con elementos nostálgicos y diseño divertido.</div>
+                <div class="project-action">
+                    <a href="chavo/iniciooo.html" target="_blank" class="action-btn">
+                        <i class="fas fa-tv"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 7 -->
+            <div class="project-card">
+                <div class="project-number">07/16</div>
+                <div class="project-title-hacker">MIS APIS</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Dashboard integrado con múltiples APIs para consultar clima, películas, noticias y más.</div>
+                <div class="project-action">
+                    <a href="html_Apis/inicioApis.html" target="_blank" class="action-btn">
+                        <i class="fas fa-code"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 8 -->
+            <div class="project-card">
+                <div class="project-number">08/16</div>
+                <div class="project-title-hacker">MI PPT EN HTML</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Presentación interactiva creada completamente en HTML, CSS y JavaScript sin necesidad de PowerPoint.</div>
+                <div class="project-action">
+                    <a href="htmll/inicioInicio.html" target="_blank" class="action-btn">
+                        <i class="fas fa-presentation"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 9 -->
+            <div class="project-card">
+                <div class="project-number">09/16</div>
+                <div class="project-title-hacker">DISEÑO LOGIN</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Interfaces de login modernas y seguras con animaciones y validación de usuarios.</div>
+                <div class="project-action">
+                    <a href="login/login.html" target="_blank" class="action-btn">
+                        <i class="fas fa-sign-in-alt"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 10 -->
+            <div class="project-card">
+                <div class="project-number">10/16</div>
+                <div class="project-title-hacker">DISEÑO DE NETFLIX</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Réplica del diseño de Netflix con interfaz moderna, catálogo de películas y sistema de reproducción.</div>
+                <div class="project-action">
+                    <a href="Netfelix/netflix.html" target="_blank" class="action-btn">
+                        <i class="fas fa-film"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 11 -->
+            <div class="project-card">
+                <div class="project-number">11/16</div>
+                <div class="project-title-hacker">SIMULACIÓN JORGITO LUNA</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Simulación de plataforma inspirada en el estilo visual y funcional de Jorgito Luna.</div>
+                <div class="project-action">
+                    <a href="paginaweb" target="_blank" class="action-btn">
+                        <i class="fas fa-music"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 12 -->
+            <div class="project-card">
+                <div class="project-number">12/16</div>
+                <div class="project-title-hacker">PÁGINA DE TEXTO EN LÍNEA</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Editor de texto en línea con funciones de formato y diseño responsivo para cualquier dispositivo.</div>
+                <div class="project-action">
+                    <a href="paginawebcss/paginawebcss.html" target="_blank" class="action-btn">
+                        <i class="fas fa-text-height"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 13 -->
+            <div class="project-card">
+                <div class="project-number">13/16</div>
+                <div class="project-title-hacker">PÁGINA DE PERSONAL SOCIAL</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Plataforma para gestión de personal social con interfaz administrativa y reportes.</div>
+                <div class="project-action">
+                    <a href="Pgina_personaSocial/personal.html" target="_blank" class="action-btn">
+                        <i class="fas fa-users"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 14 -->
+            <div class="project-card">
+                <div class="project-number">14/16</div>
+                <div class="project-title-hacker">MI PORTAFOLIO</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Portafolio personal que muestra habilidades, proyectos y experiencia en desarrollo web.</div>
+                <div class="project-action">
+                    <a href="PORTAFOLIO/portafolio.html" target="_blank" class="action-btn">
+                        <i class="fas fa-briefcase"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 15 -->
+            <div class="project-card">
+                <div class="project-number">15/16</div>
+                <div class="project-title-hacker">MI PROYECTO</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Proyecto personal que integra diversas tecnologías y demuestra habilidades de desarrollo full-stack.</div>
+                <div class="project-action">
+                    <a href="proyecto" target="_blank" class="action-btn">
+                        <i class="fas fa-rocket"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Proyecto 16 -->
+            <div class="project-card">
+                <div class="project-number">16/16</div>
+                <div class="project-title-hacker">LA EVOLUCIÓN DEL HTML</div>
+                <div class="project-title-creative">Auditoria Web</div>
+                <div class="project-description">Recorrido visual por la historia y evolución del lenguaje HTML desde sus inicios hasta la actualidad.</div>
+                <div class="project-action">
+                    <a href="VersionHTML/version.html" target="_blank" class="action-btn">
+                        <i class="fas fa-code-branch"></i> HACER CLIC
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            © 2025 - Frans Oliver Collazos Lurencio - Todos los derechos reservados
+        </div>
+    </div>
+
+    <script>
+        // Efecto de aparición escalonada mejorado
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px) rotate(5deg)';
+                card.style.animation = `fadeInUp 0.8s ease ${index * 0.1}s forwards`;
+            });
+            
+            // Crear partículas animadas
+            createParticles();
+            
+            // Función para cargar foto real
+            loadRealPhoto();
+        });
+
+        // Agregar la animación CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px) rotate(5deg);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) rotate(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Función para crear partículas animadas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Posición aleatoria
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Color aleatorio
+                const colors = ['#ff00ff', '#00ffff', '#ffff00', '#00ff00'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Animación aleatoria
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Función para cargar foto real (puedes reemplazar con tu propia foto)
+        function loadRealPhoto() {
+            const photoElement = document.getElementById('profilePhoto');
+            // Aquí puedes reemplazar la URL del placeholder por la ruta de tu foto real
+            // photoElement.src = 'ruta/a/tu/foto.jpg';
+        }
+    </script>
+</body>
+</html>

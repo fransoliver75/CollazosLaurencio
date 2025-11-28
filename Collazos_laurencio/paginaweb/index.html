@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>No Hay Suerte Sin Suerte</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<!-- Iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<style>
+  body{
+    margin:0;
+    font-family: "Montserrat", sans-serif;
+    background:#20002b;
+    color:#fff;
+    overflow-x:hidden;
+  }
+
+  /* HEADER */
+  header{
+    position:fixed;
+    top:20px; left:0; right:0;
+    display:flex;
+    justify-content:flex-end; 
+    align-items:center;
+    z-index:100;
+  }
+  .logo{
+    position:absolute;
+    top:0; left:20px;
+    transform:rotate(-18deg);
+    z-index:120;
+  }
+  .logo img{height:60px;}
+  nav{
+    margin-right:200px; 
+    margin-top:10px;    
+  }
+  nav ul{
+    display:flex;
+    list-style:none;
+    background:#fff;
+    border-radius:30px;
+    padding:6px 16px;
+    gap:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  }
+  nav ul li a{
+    text-decoration:none;
+    color:#111;
+    font-weight:600;
+    font-size:13px;
+    padding:6px 12px;
+    border-radius:12px;
+    transition:0.2s;
+  }
+  nav ul li a.active{
+    background:linear-gradient(90deg,#e3ccff,#f5eaff);
+    color:#6b2cc5;
+  }
+  .btn-login{
+    position:absolute;
+    right:30px;
+    top:20px;
+    padding:12px 26px;
+    border-radius:30px;
+    background:linear-gradient(90deg,#9fffd6,#cfa7ff);
+    color:#6b2cc5;
+    font-weight:700;
+    font-size:15px;
+    text-decoration:none;
+    box-shadow:0 4px 12px rgba(0,0,0,0.25);
+  }
+  
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding-bottom:100px;
+    overflow:hidden;
+  }
+
+  /* imagen de fondo fija como el carrusel */
+  .hero img.bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:1;
+  }
+
+  .overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(to top,rgba(32,0,43,0.95) 20%,rgba(32,0,43,0.4));
+    z-index:2;
+  }
+
+  .content{
+    position:relative;
+    z-index:3;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    max-width:1200px;
+    width:100%;
+    padding:0 40px;
+  }
+
+  .left { margin-left: 300px; }
+  .left h1{
+    font-family:"Bebas Neue", sans-serif;
+    font-size:120px;
+    margin:0;
+    line-height:0.9;
+    color:#fff;
+  }
+  .bar{
+    width:60px; height:10px;
+    background:#fff;
+    margin-bottom:10px;
+    transform:rotate(-6deg);
+  }
+
+  .right{
+    max-width:600px;
+    margin-right:200px;
+  }
+  .right p{
+    margin:0;
+    font-size:20px;
+  }
+  .beneficios{ color:#bff98c; font-weight:700; }
+  .prizes{
+    font-family:"Bebas Neue", sans-serif;
+    font-size:70px;
+    margin-top:10px;
+    color:#bff98c;
+  }
+
+  .cta{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:3;
+  }
+  .btn-sub{
+    padding:15px 40px;
+    border:none;
+    border-radius:40px;
+    font-size:18px;
+    font-weight:700;
+    background:linear-gradient(90deg,#9fffd6,#cfa7ff);
+    color:#6b2cc5;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,0.25);
+  }
+
+  /* ======= MARIPOSA ======= */
+  .mariposa-section {
+    background:linear-gradient(160deg,#2e0050,#7c00a3 70%,#c77dff);
+    text-align:center;
+    padding:80px 20px;
+    color:#fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .mariposa-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .mariposa-title {
+    font-family:"Bebas Neue", sans-serif;
+    font-size:65px;
+    margin:0 0 15px;
+    color:#fff;
+    text-shadow:0 3px 8px rgba(0,0,0,0.2);
+  }
+  .mariposa-subtitle {
+    font-size:22px;
+    margin-bottom:40px;
+    color:#e6d5ff;
+  }
+  .mariposa {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto 50px;
+  }
+  .ala {
+    position: absolute;
+    width: 180px;
+    height: 220px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    box-shadow: 0 0 20px rgba(207,157,255,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+  }
+  .ala img {
+    width: 85%;
+    height: 85%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .ala-superior-izquierda {
+    top: 0;
+    left: 0;
+    transform-origin: bottom right;
+    animation: aleteo-superior-izquierda 4s infinite ease-in-out;
+  }
+  .ala-superior-derecha {
+    top: 0;
+    right: 0;
+    transform-origin: bottom left;
+    animation: aleteo-superior-derecha 4s infinite ease-in-out;
+  }
+  .ala-inferior-izquierda {
+    bottom: 0;
+    left: 0;
+    transform-origin: top right;
+    animation: aleteo-inferior-izquierda 4s infinite ease-in-out;
+  }
+  .ala-inferior-derecha {
+    bottom: 0;
+    right: 0;
+    transform-origin: top left;
+    animation: aleteo-inferior-derecha 4s infinite ease-in-out;
+  }
+  .cuerpo-mariposa {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 180px;
+    background: linear-gradient(to bottom, #4a007d, #9d00ff);
+    border-radius: 20px;
+    z-index: 10;
+    box-shadow: 0 0 15px rgba(157,0,255,0.7);
+  }
+  .mariposa-botones {
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    margin-top:40px;
+  }
+  .mariposa-botones a {
+    padding:14px 30px;
+    border-radius:40px;
+    font-weight:700;
+    text-decoration:none;
+    font-size:16px;
+    transition:0.3s;
+  }
+  .btn-premios{
+    background:#fff;
+    border:2px solid #9d3dfc;
+    color:#9d3dfc;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  }
+  .btn-premios:hover{
+    background:#9d3dfc;
+    color:#fff;
+  }
+  .btn-sub2{
+    background:linear-gradient(90deg,#9fffd6,#cfa7ff);
+    color:#4a007d;
+    font-weight:700;
+    box-shadow:0 6px 20px rgba(0,0,0,0.35);
+  }
+  .btn-sub2:hover{
+    transform:scale(1.05);
+  }
+
+  /* Animaciones de las alas */
+  @keyframes aleteo-superior-izquierda {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-15deg); }
+  }
+  @keyframes aleteo-superior-derecha {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+  }
+  @keyframes aleteo-inferior-izquierda {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(10deg); }
+  }
+  @keyframes aleteo-inferior-derecha {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-10deg); }
+  }
+
+  /* ======= SUBS ======= */
+  .subs{
+    text-align:center;
+    padding:90px 20px;
+    background:linear-gradient(to bottom,#430067,#9d00ff);
+    color:#fff;
+  }
+  .subs h2{
+    font-family:"Bebas Neue", sans-serif;
+    font-size:55px;
+    margin-bottom:15px;
+    text-shadow:0 4px 12px rgba(0,0,0,0.4);
+  }
+  .subs p{
+    font-size:20px;
+    margin-bottom:30px;
+    color:#eee;
+  }
+  .btn-green{
+    display:inline-block;
+    padding:16px 38px;
+    background:linear-gradient(90deg,#9fffd6,#cfa7ff);
+    color:#4a007d;
+    font-weight:700;
+    border-radius:50px;
+    text-decoration:none;
+    margin-bottom:45px;
+    font-size:18px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.4);
+    transition:0.3s;
+  }
+  .btn-green:hover{
+    transform:scale(1.05);
+  }
+  .beneficios-box{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+  .card{
+    background:rgba(255,255,255,0.08);
+    border-radius:20px;
+    padding:30px 20px;
+    width:220px;
+    backdrop-filter:blur(6px);
+    box-shadow:0 8px 25px rgba(0,0,0,0.3);
+    transition:0.3s;
+  }
+  .card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 28px rgba(0,0,0,0.4);
+  }
+  .card .circle{
+    width:120px;
+    height:120px;
+    margin:0 auto 20px;
+  }
+  .card h3{
+    font-size:20px;
+    margin:0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .content {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0 20px;
+    }
+    .left {
+      margin-left: 0;
+      margin-bottom: 30px;
+    }
+    .right {
+      margin-right: 0;
+    }
+    .left h1 {
+      font-size: 80px;
+    }
+    .mariposa {
+      width: 300px;
+      height: 300px;
+    }
+    .ala {
+      width: 140px;
+      height: 170px;
+    }
+    .mariposa-title {
+      font-size: 50px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="imagen.jpg" alt="Logo">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html" class="active">Inicio</a></li>
+      <li><a href="premios.html">Premios</a></li>
+      <li><a href="#">Ganadores</a></li>
+      <li><a href="#">Beneficios</a></li>
+      <li><a href="#">¿Cómo funciona?</a></li>
+      <li><a href="#">Suscripción</a></li>
+    </ul>
+  </nav>
+  <a href="login.html" class="btn-login">Iniciar sesión</a>
+</header>
+
+
+
+<section class="hero">
+  <!-- Fondo ajustado -->
+  <img src="portada.jpg" class="bg" alt="Fondo">
+  <div class="overlay"></div>
+
+  <div class="content">
+    <div class="left">
+      <div class="bar"></div>
+      <h1>ÚNETE</h1>
+    </div>
+    <div class="right">
+      <p>a la comunidad de <span class="beneficios">Jorgito Luna</span>, accede a</p>
+      <p class="beneficios">BENEFICIOS EXCLUSIVOS y participa por</p>
+      <div class="prizes">PREMIOS INCREÍBLES</div>
+    </div>
+  </div>
+  <div class="cta">
+    <button class="btn-sub">Suscribirme</button>
+  </div>
+</section>
+
+<!-- SECCIÓN MARIPOSA -->
+<section class="mariposa-section">
+  <div class="mariposa-container">
+    <h2 class="mariposa-title">¡Confía en tu suerte!</h2>
+    <p class="mariposa-subtitle">Premios increíbles todas las semanas</p>
+    
+    <div class="mariposa">
+      <div class="ala ala-superior-izquierda">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="iPhone">
+      </div>
+      <div class="ala ala-superior-derecha">
+        <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Moto">
+      </div>
+      <div class="ala ala-inferior-izquierda">
+        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Auto">
+      </div>
+      <div class="ala ala-inferior-derecha">
+        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Maleta">
+      </div>
+      <div class="cuerpo-mariposa"></div>
+    </div>
+    
+    <div class="mariposa-botones">
+      <a href="premios.html" class="btn-premios">Todos los premios</a>
+      <a href="#" class="btn-sub2">¡Suscribirme ya!</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN DE SUSCRIPCIÓN -->
+<section class="subs">
+  <h2>UNA SUSCRIPCIÓN EXCLUSIVA</h2>
+  <p>Para elevar tu opulencia con:</p>
+  <a href="#" class="btn-green">QUIERO SUSCRIBIRME</a>
+
+  <div class="beneficios-box">
+    <div class="card">
+      <div class="circle"><img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=120&q=80" alt="Descuentos"></div>
+      <h3>Descuentos y Promos</h3>
+    </div>
+    <div class="card">
+      <div class="circle"><img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=120&q=80" alt="Merch"></div>
+      <h3>Merch exclusivo</h3>
+    </div>
+    <div class="card">
+      <div class="circle"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=120&q=80" alt="VIP"></div>
+      <h3>Experiencias VIP</h3>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Efecto interactivo para las alas de la mariposa
+  document.addEventListener('DOMContentLoaded', function() {
+    const alas = document.querySelectorAll('.ala');
+    
+    alas.forEach(ala => {
+      ala.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.05)';
+        this.style.transition = 'transform 0.3s ease';
+      });
+      
+      ala.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

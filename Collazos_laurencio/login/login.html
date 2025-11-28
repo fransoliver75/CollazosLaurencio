@@ -1,0 +1,28 @@
+<!DOCTYPE html>  <!-- Declara que este es un documento HTML5 -->
+<html lang="es">  <!-- Apertura del documento HTML con idioma español -->
+<head>  <!-- Inicio de la sección de metadatos y recursos -->
+    <meta charset="UTF-8" />  <!-- Define la codificación de caracteres como UTF-8 (incluye caracteres en español) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />  <!-- Configura la vista para dispositivos móviles -->
+    <title>Login</title>  <!-- Título de la pestaña del navegador -->
+    <link rel="stylesheet" href="styles.css" />  <!-- Enlace al archivo CSS externo para estilos -->
+</head>  <!-- Fin de la sección head -->
+<body>  <!-- Inicio del cuerpo del documento (contenido visible) -->
+    <div class="login-container">  <!-- Contenedor principal para centrar y organizar el formulario -->
+        <img src="logo.jpg" alt="Logo" class="logo" />  <!-- Muestra el logo de la institución (texto alternativo para accesibilidad) -->
+        <form action="login.php" method="POST" class="login-form">  <!-- Formulario que enviará datos a login.php usando método POST -->
+            <h2>Iniciar Sesión</h2>  <!-- Título del formulario -->
+            <input type="text" name="username" placeholder="Usuario" required />  <!-- Campo para ingresar nombre de usuario (obligatorio) -->
+            <input type="password" name="password" placeholder="Contraseña" required />  <!-- Campo para contraseña (se ocultan los caracteres) -->
+            <select name="rol" required>  <!-- Lista desplegable para seleccionar rol de usuario (obligatorio) -->
+                <option value="" disabled selected>Selecciona un rol</option>  <!-- Opción por defecto (no seleccionable) -->
+                <option value="admin">Secretaria Academica</option>  <!-- Opción para secretaría académica (acceso administrativo) -->
+                <option value="admin">Unidad Academica</option>  <!-- Opción para unidad académica (acceso administrativo) -->
+                <option value="admin">Administrador</option>  <!-- Opción para administrador (acceso completo) -->
+                <option value="usuario">Profesor</option>  <!-- Opción para profesores (acceso limitado) -->
+                <option value="usuario">Estudiante</option>  <!-- Opción para estudiantes (acceso limitado) -->
+            </select>
+            <button type="submit">Entrar</button>  <!-- Botón para enviar el formulario y autenticarse -->
+        </form>  <!-- Fin del formulario -->
+    </div>  <!-- Fin del contenedor principal -->
+</body>  <!-- Fin del cuerpo del documento -->
+</html>  <!-- Fin del documento HTML -->

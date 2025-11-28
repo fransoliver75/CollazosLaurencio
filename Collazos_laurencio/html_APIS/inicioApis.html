@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorador de APIs | Búsquedas Precisas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="stile.css">
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>EXPLORADOR DE APIS</h1>
+            <p class="subtitle">Búsquedas precisas con APIs reales</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="api-grid">
+            <!-- Sección del Clima -->
+            <section class="api-section">
+                <div class="section-title">
+                    <i class="fas fa-cloud-sun"></i>
+                    <h2>Clima Actual</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="city-input" placeholder="Ingresa una ciudad (ej: Lima, London, Tokyo)">
+                    <button id="get-weather">Obtener Clima</button>
+                </div>
+                <div class="loader" id="weather-loader">
+                    <div class="loader-spinner"></div>
+                    <p>Cargando datos del clima...</p>
+                </div>
+                <div id="weather-results"></div>
+            </section>
+
+            <!-- Sección de Películas -->
+            <section class="api-section">
+                <div class="section-title">
+                    <i class="fas fa-film"></i>
+                    <h2>Buscador de Películas</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="movie-input" placeholder="Buscar película por título">
+                    <button id="search-movies">Buscar</button>
+                </div>
+                <div class="loader" id="movies-loader">
+                    <div class="loader-spinner"></div>
+                    <p>Buscando películas...</p>
+                </div>
+                <div class="results" id="movies-results"></div>
+            </section>
+
+            <!-- Sección de Noticias -->
+            <section class="api-section">
+                <div class="section-title">
+                    <i class="fas fa-newspaper"></i>
+                    <h2>Titulares de Noticias</h2>
+                </div>
+                <div class="input-group">
+                    <select id="news-category">
+                        <option value="general">General</option>
+                        <option value="business">Negocios</option>
+                        <option value="entertainment">Entretenimiento</option>
+                        <option value="health">Salud</option>
+                        <option value="science">Ciencia</option>
+                        <option value="sports">Deportes</option>
+                        <option value="technology">Tecnología</option>
+                    </select>
+                    <button id="get-news">Obtener Noticias</button>
+                </div>
+                <div class="loader" id="news-loader">
+                    <div class="loader-spinner"></div>
+                    <p>Cargando noticias...</p>
+                </div>
+                <div class="results" id="news-results"></div>
+            </section>
+
+            <!-- Sección de Usuarios de GitHub -->
+            <section class="api-section">
+                <div class="section-title">
+                    <i class="fab fa-github"></i>
+                    <h2>Usuarios de GitHub</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="github-user-input" placeholder="Buscar usuario de GitHub">
+                    <button id="search-github-users">Buscar</button>
+                </div>
+                <div class="loader" id="github-loader">
+                    <div class="loader-spinner"></div>
+                    <p>Buscando usuarios...</p>
+                </div>
+                <div class="results" id="github-results"></div>
+            </section>
+
+            <!-- Sección de Países -->
+            <section class="api-section">
+                <div class="section-title">
+                    <i class="fas fa-globe-americas"></i>
+                    <h2>Información de Países</h2>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="country-input" placeholder="Buscar país por nombre">
+                    <button id="search-countries">Buscar</button>
+                </div>
+                <div class="loader" id="countries-loader">
+                    <div class="loader-spinner"></div>
+                    <p>Buscando países...</p>
+                </div>
+                <div class="results" id="countries-results"></div>
+            </section>
+
+            <!-- Sección de Criptomonedas -->
+            <section class="api-section">
+                <div class="section-title">
+                    <i class="fab fa-bitcoin"></i>
+                    <h2>Cotizaciones de Criptomonedas</h2>
+                </div>
+                <div class="input-group">
+                    <select id="crypto-currency">
+                        <option value="usd">USD</option>
+                        <option value="eur">EUR</option>
+                        <option value="gbp">GBP</option>
+                        <option value="jpy">JPY</option>
+                    </select>
+                    <button id="get-crypto">Obtener Cotizaciones</button>
+                </div>
+                <div class="loader" id="crypto-loader">
+                    <div class="loader-spinner"></div>
+                    <p>Cargando cotizaciones...</p>
+                </div>
+                <div class="results" id="crypto-results"></div>
+            </section>
+        </div>
+    </div>
+
+    <div class="floating-btn" id="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Explorador de APIs - Búsquedas precisas con APIs reales</p>
+        </div>
+    </footer>
+<script src="scrip.js"></script>
+  
+</body>
+</html>

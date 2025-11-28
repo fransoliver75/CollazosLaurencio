@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Interactivo - El Chavo del 8</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #ff4081;
+            --secondary: #3f51b5;
+            --accent: #00bcd4;
+            --dark: #212121;
+            --light: #f5f5f5;
+            --chavo-yellow: #ffeb3b;
+            --chavo-brown: #795548;
+            --kiko-blue: #2196f3;
+            --chilindrina-pink: #e91e63;
+            --donramon-green: #4caf50;
+            --quico-purple: #9c27b0;
+            --popis-orange: #ff9800;
+            --nono-gray: #607d8b;
+            --profesor-gray: #795548;
+            --florinda-pink: #e91e63;
+            --barriga-red: #f44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--secondary), var(--dark));
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 5px 5px 0 var(--primary), 10px 10px 0 rgba(0,0,0,0.2);
+            letter-spacing: 3px;
+            color: var(--chavo-yellow);
+            background: linear-gradient(45deg, var(--chavo-yellow), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: perspective(500px) rotateX(10deg);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            text-shadow: 2px 2px 0 var(--accent);
+        }
+        
+        .tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px 15px 0 0;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .tab.active {
+            background: var(--primary);
+            box-shadow: 0 0 15px rgba(255, 64, 129, 0.7);
+        }
+        
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 0 0 15px 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease-out;
+            min-height: 600px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Estilos para pestaña 1 - Juego */
+        .game-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 20px;
+        }
+        
+        @media (max-width: 1100px) {
+            .game-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .vecindad-container {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(to bottom, #87CEEB, #1E90FF);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .vecindad-map {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #8BC34A, #4CAF50);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .departamento {
+            position: absolute;
+            background: #8B4513;
+            border: 3px solid #5D4037;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .departamento::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 15px;
+            background: #A0522D;
+            top: -15px;
+            left: 0;
+        }
+        
+        .departamento-8 {
+            width: 120px;
+            height: 100px;
+            top: 100px;
+            left: 100px;
+        }
+        
+        .departamento-72 {
+            width: 120px;
+            height: 100px;
+            top: 100px;
+            right: 100px;
+        }
+        
+        .departamento-14 {
+            width: 150px;
+            height: 120px;
+            bottom: 100px;
+            left: 150px;
+        }
+        
+        .departamento-71 {
+            width: 150px;
+            height: 120px;
+            bottom: 100px;
+            right: 150px;
+        }
+        
+        .barril {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: #8B4513;
+            border-radius: 10px;
+            top: 250px;
+            left: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .barril::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 15px;
+            background: #A0522D;
+            top: -15px;
+            left: -5px;
+            border-radius: 5px;
+        }
+        
+        .character {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            z-index: 10;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .character-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--chavo-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 5px;
+            border: 2px solid white;
+        }
+        
+        .character.chavo .character-avatar { background: var(--chavo-yellow); }
+        .character.kiko .character-avatar { background: var(--kiko-blue); }
+        .character.chilindrina .character-avatar { background: var(--chilindrina-pink); }
+        .character.donramon .character-avatar { background: var(--donramon-green); }
+        .character.quico .character-avatar { background: var(--quico-purple); }
+        .character.popis .character-avatar { background: var(--popis-orange); }
+        .character.profesor .character-avatar { background: var(--profesor-gray); }
+        
+        .character-dialog {
+            position: absolute;
+            top: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: black;
+            padding: 10px 15px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-size: 14px;
+            max-width: 200px;
+            text-align: center;
+            display: none;
+            z-index: 20;
+            animation: popIn 0.3s ease-out;
+        }
+        
+        .character-dialog::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid white;
+        }
+        
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .control-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .control-btn:hover {
+            transform: scale(1.1);
+            background: #e91e63;
+        }
+        
+        .character-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .char-btn {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .char-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .char-btn.active {
+            background: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 64, 129, 0.7);
+        }
+        
+        .char-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--chavo-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        /* Estilos para pestaña 2 - Chat */
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .message {
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease-out;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+        
+        .user-message {
+            background: var(--primary);
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot-message {
+            background: var(--secondary);
+            border-bottom-left-radius: 5px;
+        }
+        
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+        }
+        
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .chat-button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .chat-button:hover {
+            background: #0097a7;
+            transform: scale(1.05);
+        }
+        
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .suggestion {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .suggestion:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Estilos para pestaña 3 - Editor */
+        .editor-container {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .editor-toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .editor-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .editor-button:hover {
+            background: #e91e63;
+            transform: translateY(-2px);
+        }
+        
+        .editor-textarea {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            resize: none;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .file-info {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        /* Estilos para pestaña 4 - Encuestas */
+        .poll-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 900px) {
+            .poll-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .poll-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .poll-option {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .poll-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .poll-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 15px;
+            transition: width 1s ease-out;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .results-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin-top: 20px;
+        }
+        
+        .poll-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .add-character {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .add-character-input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .add-character-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-character-btn:hover {
+            background: #0097a7;
+            transform: scale(1.05);
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes popIn {
+            0% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 64, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0); }
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            animation: slideInRight 0.5s ease-out;
+            display: none;
+            z-index: 100;
+            font-weight: bold;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .audio-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .audio-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .audio-btn:hover {
+            transform: scale(1.1);
+            background: #e91e63;
+        }
+        
+        .character-name {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="audio-controls">
+        <button class="audio-btn" id="music-toggle">🎵</button>
+        <button class="audio-btn" id="sfx-toggle">🔊</button>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>El Chavo del 8</h1>
+            <p class="subtitle">Juego Interactivo - Personajes, Chat, Editor y Encuestas</p>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="game">🎮 Juego Interactivo</div>
+            <div class="tab" data-tab="chat">💬 Chat con Personajes</div>
+            <div class="tab" data-tab="editor">📝 Editor de Notas</div>
+            <div class="tab" data-tab="poll">📊 Encuestas</div>
+        </div>
+        
+        <!-- Pestaña 1 - Juego -->
+        <div class="tab-content active" id="game-tab">
+            <div class="game-container">
+                <div class="vecindad-container">
+                    <div class="vecindad-map" id="vecindad-map">
+                        <!-- Elementos de la vecindad -->
+                        <div class="departamento departamento-8">Depto. 8</div>
+                        <div class="departamento departamento-72">Depto. 72</div>
+                        <div class="departamento departamento-14">Depto. 14</div>
+                        <div class="departamento departamento-71">Depto. 71</div>
+                        <div class="barril">Barril del Chavo</div>
+                        
+                        <!-- Personajes posicionados en la vecindad -->
+                        <div class="character chavo" id="chavo" style="left: 200px; top: 300px;">
+                            <div class="character-avatar">👦</div>
+                            <div class="character-dialog" id="chavo-dialog"></div>
+                            <div class="character-name">El Chavo</div>
+                        </div>
+                        
+                        <div class="character kiko" id="kiko" style="left: 400px; top: 250px;">
+                            <div class="character-avatar">👨</div>
+                            <div class="character-dialog" id="kiko-dialog"></div>
+                            <div class="character-name">Kiko</div>
+                        </div>
+                        
+                        <div class="character chilindrina" id="chilindrina" style="left: 150px; top: 200px;">
+                            <div class="character-avatar">👧</div>
+                            <div class="character-dialog" id="chilindrina-dialog"></div>
+                            <div class="character-name">Chilindrina</div>
+                        </div>
+                        
+                        <div class="character donramon" id="donramon" style="left: 100px; top: 350px;">
+                            <div class="character-avatar">👴</div>
+                            <div class="character-dialog" id="donramon-dialog"></div>
+                            <div class="character-name">Don Ramón</div>
+                        </div>
+                        
+                        <div class="character quico" id="quico" style="left: 450px; top: 150px;">
+                            <div class="character-avatar">👦</div>
+                            <div class="character-dialog" id="quico-dialog"></div>
+                            <div class="character-name">Quico</div>
+                        </div>
+                        
+                        <div class="character popis" id="popis" style="left: 500px; top: 100px;">
+                            <div class="character-avatar">👩</div>
+                            <div class="character-dialog" id="popis-dialog"></div>
+                            <div class="character-name">Popis</div>
+                        </div>
+                        
+                        <div class="character profesor" id="profesor" style="left: 350px; top: 400px;">
+                            <div class="character-avatar">👨‍🏫</div>
+                            <div class="character-dialog" id="profesor-dialog"></div>
+                            <div class="character-name">Profesor</div>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="control-btn" id="up-btn">↑</button>
+                        <button class="control-btn" id="left-btn">←</button>
+                        <button class="control-btn" id="down-btn">↓</button>
+                        <button class="control-btn" id="right-btn">→</button>
+                        <button class="control-btn" id="action-btn">⚡</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Selecciona un Personaje</h3>
+                    <div class="character-selector">
+                        <button class="char-btn active" data-char="chavo">
+                            <div class="char-icon">👦</div>
+                            <span>El Chavo</span>
+                        </button>
+                        <button class="char-btn" data-char="kiko">
+                            <div class="char-icon">👨</div>
+                            <span>Kiko</span>
+                        </button>
+                        <button class="char-btn" data-char="chilindrina">
+                            <div class="char-icon">👧</div>
+                            <span>Chilindrina</span>
+                        </button>
+                        <button class="char-btn" data-char="donramon">
+                            <div class="char-icon">👴</div>
+                            <span>Don Ramón</span>
+                        </button>
+                        <button class="char-btn" data-char="quico">
+                            <div class="char-icon">👦</div>
+                            <span>Quico</span>
+                        </button>
+                        <button class="char-btn" data-char="popis">
+                            <div class="char-icon">👩</div>
+                            <span>Popis</span>
+                        </button>
+                        <button class="char-btn" data-char="profesor">
+                            <div class="char-icon">👨‍🏫</div>
+                            <span>Profesor</span>
+                        </button>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <h3>Instrucciones</h3>
+                        <p>Usa las flechas para mover al personaje seleccionado.</p>
+                        <p>Presiona el botón ⚡ para interactuar con otros personajes.</p>
+                        <p>Haz clic en cualquier personaje para seleccionarlo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pestaña 2 - Chat -->
+        <div class="tab-content" id="chat-tab">
+            <h2>Chat con los Personajes de El Chavo del 8</h2>
+            <p>Pregunta lo que quieras sobre la serie o sus personajes</p>
+            
+            <div class="chat-container" id="chat-messages">
+                <div class="message bot-message">
+                    ¡Hola! Soy el Chavo del 8. Puedes preguntarme sobre la serie, los personajes o cualquier cosa relacionada con la vecindad.
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chat-input" placeholder="Escribe tu mensaje...">
+                <button class="chat-button" onclick="sendMessage()">Enviar</button>
+            </div>
+            
+            <div class="suggestions">
+                <div class="suggestion" onclick="useSuggestion(this)">¿Quién es tu mejor amigo?</div>
+                <div class="suggestion" onclick="useSuggestion(this)">¿Dónde vives?</div>
+                <div class="suggestion" onclick="useSuggestion(this)">¿Qué te gusta comer?</div>
+                <div class="suggestion" onclick="useSuggestion(this)">Cuéntame sobre Don Ramón</div>
+                <div class="suggestion" onclick="useSuggestion(this)">¿Qué personaje es más divertido?</div>
+                <div class="suggestion" onclick="useSuggestion(this)">¿Cómo es la vecindad?</div>
+                <div class="suggestion" onclick="useSuggestion(this)">¿Por qué te llaman Chavo del 8?</div>
+                <div class="suggestion" onclick="useSuggestion(this)">¿Qué haces cuando tienes hambre?</div>
+            </div>
+        </div>
+        
+        <!-- Pestaña 3 - Editor -->
+        <div class="tab-content" id="editor-tab">
+            <h2>Editor de Notas Avanzado</h2>
+            <p>Crea y gestiona tus notas con funciones avanzadas</p>
+            
+            <div class="editor-container">
+                <div class="editor-toolbar">
+                    <button class="editor-button" onclick="saveNote()">💾 Guardar</button>
+                    <button class="editor-button" onclick="loadNote()">📂 Cargar</button>
+                    <button class="editor-button" onclick="clearNote()">🗑️ Borrar</button>
+                    <button class="editor-button" onclick="formatText('bold')">𝐁 Negrita</button>
+                    <button class="editor-button" onclick="formatText('italic')">𝐼 Cursiva</button>
+                    <button class="editor-button" onclick="formatText('underline')">𝐔 Subrayado</button>
+                    <button class="editor-button" onclick="insertDate()">📅 Fecha</button>
+                    <button class="editor-button" onclick="wordCount()">📊 Contar palabras</button>
+                    <button class="editor-button" onclick="exportNote()">📤 Exportar</button>
+                </div>
+                <textarea class="editor-textarea" id="note-textarea" placeholder="Escribe tus notas aquí..."></textarea>
+                <div class="file-info">
+                    <span id="char-count">0 caracteres</span>
+                    <span id="word-count">0 palabras</span>
+                    <span id="save-time">No guardado</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pestaña 4 - Encuestas -->
+        <div class="tab-content" id="poll-tab">
+            <h2>Simulador de Votación - Personajes Favoritos</h2>
+            <p>Vota por tu personaje favorito de El Chavo del 8 y ve los resultados en tiempo real</p>
+            
+            <div class="poll-container">
+                <div class="poll-options">
+                    <div class="poll-option" onclick="vote('chavo')">
+                        <span>El Chavo</span>
+                        <span id="votes-chavo">0 votos</span>
+                        <div class="poll-bar" id="bar-chavo" style="width: 0%"></div>
+                    </div>
+                    <div class="poll-option" onclick="vote('kiko')">
+                        <span>Kiko</span>
+                        <span id="votes-kiko">0 votos</span>
+                        <div class="poll-bar" id="bar-kiko" style="width: 0%"></div>
+                    </div>
+                    <div class="poll-option" onclick="vote('chilindrina')">
+                        <span>Chilindrina</span>
+                        <span id="votes-chilindrina">0 votos</span>
+                        <div class="poll-bar" id="bar-chilindrina" style="width: 0%"></div>
+                    </div>
+                    <div class="poll-option" onclick="vote('donramon')">
+                        <span>Don Ramón</span>
+                        <span id="votes-donramon">0 votos</span>
+                        <div class="poll-bar" id="bar-donramon" style="width: 0%"></div>
+                    </div>
+                    <div class="poll-option" onclick="vote('quico')">
+                        <span>Quico</span>
+                        <span id="votes-quico">0 votos</span>
+                        <div class="poll-bar" id="bar-quico" style="width: 0%"></div>
+                    </div>
+                    <div class="poll-option" onclick="vote('popis')">
+                        <span>Popis</span>
+                        <span id="votes-popis">0 votos</span>
+                        <div class="poll-bar" id="bar-popis" style="width: 0%"></div>
+                    </div>
+                    <div class="poll-option" onclick="vote('profesor')">
+                        <span>Profesor</span>
+                        <span id="votes-profesor">0 votos</span>
+                        <div class="poll-bar" id="bar-profesor" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="results-container">
+                    <h3>Resultados en Tiempo Real</h3>
+                    <div class="chart-container">
+                        <canvas id="poll-chart"></canvas>
+                    </div>
+                    
+                    <div class="poll-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-votes">0</div>
+                            <div class="stat-label">Total de Votos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="leading-char">-</div>
+                            <div class="stat-label">Personaje Líder</div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-character">
+                        <input type="text" class="add-character-input" id="new-character-name" placeholder="Nombre del nuevo personaje">
+                        <button class="add-character-btn" onclick="addCharacterToPoll()">➕ Añadir Personaje</button>
+                    </div>
+                    
+                    <button class="editor-button" onclick="resetVotes()" style="margin-top: 15px;">🔄 Reiniciar Encuesta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        ¡Nota guardada correctamente!
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="background-music" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-667.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="move-sound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-footsteps-on-tall-grass-518.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="dialog-sound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-voice-laugh-343.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="chavo-voice">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cartvoice-2-443.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="kiko-voice">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-voice-laugh-343.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="chilindrina-voice">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-child-voice-laugh-479.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="donramon-voice">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-man-voice-laugh-480.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="quico-voice">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-boy-voice-laugh-481.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="popis-voice">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-girl-voice-laugh-482.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="profesor-voice">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-voice-laugh-343.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Sistema de pestañas
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remover clase active de todas las pestañas y contenidos
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Activar pestaña clickeada
+                this.classList.add('active');
+                document.getElementById(`${this.dataset.tab}-tab`).classList.add('active');
+            });
+        });
+        
+        // Variables globales del juego
+        let selectedCharacter = 'chavo';
+        let characters = {
+            chavo: { x: 200, y: 300 },
+            kiko: { x: 400, y: 250 },
+            chilindrina: { x: 150, y: 200 },
+            donramon: { x: 100, y: 350 },
+            quico: { x: 450, y: 150 },
+            popis: { x: 500, y: 100 },
+            profesor: { x: 350, y: 400 }
+        };
+        
+        let musicEnabled = true;
+        let sfxEnabled = true;
+        
+        // Elementos de audio
+        const backgroundMusic = document.getElementById('background-music');
+        const moveSound = document.getElementById('move-sound');
+        const dialogSound = document.getElementById('dialog-sound');
+        const chavoVoice = document.getElementById('chavo-voice');
+        const kikoVoice = document.getElementById('kiko-voice');
+        const chilindrinaVoice = document.getElementById('chilindrina-voice');
+        const donramonVoice = document.getElementById('donramon-voice');
+        const quicoVoice = document.getElementById('quico-voice');
+        const popisVoice = document.getElementById('popis-voice');
+        const profesorVoice = document.getElementById('profesor-voice');
+        
+        // Configurar volúmenes
+        backgroundMusic.volume = 0.5;
+        moveSound.volume = 0.7;
+        dialogSound.volume = 0.8;
+        chavoVoice.volume = 0.9;
+        kikoVoice.volume = 0.9;
+        chilindrinaVoice.volume = 0.9;
+        donramonVoice.volume = 0.9;
+        quicoVoice.volume = 0.9;
+        popisVoice.volume = 0.9;
+        profesorVoice.volume = 0.9;
+        
+        // Inicializar selección de personajes
+        document.querySelectorAll('.char-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.char-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedCharacter = this.dataset.char;
+                
+                // Resaltar el personaje seleccionado en el mapa
+                document.querySelectorAll('.character').forEach(c => {
+                    c.style.border = 'none';
+                });
+                document.getElementById(selectedCharacter).style.border = '3px solid yellow';
+            });
+        });
+        
+        // Funcionalidad de movimiento de personajes
+        document.getElementById('up-btn').addEventListener('click', () => moveCharacter(0, -30));
+        document.getElementById('down-btn').addEventListener('click', () => moveCharacter(0, 30));
+        document.getElementById('left-btn').addEventListener('click', () => moveCharacter(-30, 0));
+        document.getElementById('right-btn').addEventListener('click', () => moveCharacter(30, 0));
+        document.getElementById('action-btn').addEventListener('click', interactWithCharacters);
+        
+        // Permitir seleccionar personajes haciendo clic en ellos
+        document.querySelectorAll('.character').forEach(char => {
+            char.addEventListener('click', function() {
+                selectedCharacter = this.id;
+                
+                // Actualizar botones de selección
+                document.querySelectorAll('.char-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector(`.char-btn[data-char="${selectedCharacter}"]`).classList.add('active');
+                
+                // Resaltar el personaje seleccionado
+                document.querySelectorAll('.character').forEach(c => {
+                    c.style.border = 'none';
+                });
+                this.style.border = '3px solid yellow';
+            });
+        });
+        
+        function moveCharacter(dx, dy) {
+            // Reproducir sonido de movimiento
+            if (sfxEnabled) {
+                moveSound.currentTime = 0;
+                moveSound.play().catch(e => console.log("Error reproduciendo sonido de movimiento"));
+            }
+            
+            characters[selectedCharacter].x += dx;
+            characters[selectedCharacter].y += dy;
+            
+            // Limitar el movimiento dentro del área visible
+            characters[selectedCharacter].x = Math.max(50, Math.min(550, characters[selectedCharacter].x));
+            characters[selectedCharacter].y = Math.max(50, Math.min(450, characters[selectedCharacter].y));
+            
+            updateCharacterPosition(selectedCharacter);
+            checkCharacterInteractions();
+        }
+        
+        function updateCharacterPosition(character) {
+            const elem = document.getElementById(character);
+            if (elem) {
+                elem.style.left = `${characters[character].x}px`;
+                elem.style.top = `${characters[character].y}px`;
+            }
+        }
+        
+        function checkCharacterInteractions() {
+            const currentChar = characters[selectedCharacter];
+            const others = Object.keys(characters).filter(char => char !== selectedCharacter);
+            
+            others.forEach(other => {
+                const distance = Math.sqrt(
+                    Math.pow(currentChar.x - characters[other].x, 2) + 
+                    Math.pow(currentChar.y - characters[other].y, 2)
+                );
+                
+                if (distance < 80) {
+                    showInteraction(selectedCharacter, other);
+                }
+            });
+        }
+        
+        function showInteraction(char1, char2) {
+            const dialogs = {
+                chavo: {
+                    kiko: ["¡Oye Kiko, vamos a jugar!", "¿Trajiste pelota?", "Se me escapó un pedorrito..."],
+                    chilindrina: ["¡Chilindrina, no me molestes!", "¿Quieres un taco?", "¡Es que no me tienen paciencia!"],
+                    donramon: ["Don Ramón, ¿no tendrá trabajo?", "¡Trabajo, trabajo, trabajo!", "¿Me presta un peso?"],
+                    quico: ["Quico, no seas malo", "¡Tu mamá es muy gorda!", "¡Fue sin querer queriendo!"],
+                    popis: ["Hola Popis, ¿cómo estás?", "Eres muy presumida", "¿Quieres jugar con nosotros?"],
+                    profesor: ["Profesor, ¿puede explicarme otra vez?", "¡No entendí nada!", "¿Puedo ir al baño?"]
+                },
+                kiko: {
+                    chavo: ["¡Chavo, se me chispoteó!", "Vamos a jugar a la pelota", "Mi papá me va a comprar un helado"],
+                    chilindrina: ["Chilindrina, no seas chismosa", "¡Eso, eso, eso!", "¿Quieres ser mi novia?"],
+                    donramon: ["Don Ramón, ¿ya consiguió trabajo?", "¡No me grite!", "¿Me presta un juguete?"],
+                    quico: ["Quico, no presumas", "Tu mamá es muy gorda", "¡Vamos a pelear!"],
+                    popis: ["Hola Popis, ¿quieres jugar?", "Eres muy bonita", "¿Te gustan mis juguetes?"],
+                    profesor: ["Profesor, no entendí la clase", "¿Puedo salir al recreo?", "¡Qué aburrido!"]
+                },
+                chilindrina: {
+                    chavo: ["¡Chavo, eres un tonto!", "¿Quieres ser mi novio?", "¡Papá, papá, el Chavo me está molestando!"],
+                    kiko: ["Kiko, no seas mentiroso", "¡Eso, eso, eso!", "¿Me compras un helado?"],
+                    donramon: ["¡Papá, tengo hambre!", "¿Cuándo vamos a comer?", "¡No quiero ir a la escuela!"],
+                    quico: ["Quico, eres un presumido", "Tu mamá es muy gorda", "¡No me gustas!"],
+                    popis: ["Popis, eres una engreída", "Tu papá tiene mucho dinero", "¡No quiero ser tu amiga!"],
+                    profesor: ["Profesor, ¿puedo salir al baño?", "No entendí la tarea", "¡Qué difícil!"]
+                },
+                donramon: {
+                    chavo: ["Chavo, ¿no tendrás un taco?", "¡Trabajo, trabajo, trabajo!", "Ayúdame a esconderme del señor Barriga"],
+                    kiko: ["Kiko, no hagas tanto ruido", "Tu papá sí que tiene trabajo", "¿Me prestas un peso?"],
+                    chilindrina: ["¡Hija, no molestes!", "¿Ya hiciste la tarea?", "Vamos a comer algo"],
+                    quico: ["Quico, dile a tu mamá que me preste un poco de azúcar", "Tu mamá es muy gorda", "No presumas tanto"],
+                    popis: ["Popis, dile a tu papá que me dé trabajo", "Eres una niña muy educada", "Tu familia tiene mucha suerte"],
+                    profesor: ["Profesor, ¿no tendrá algún trabajo para mí?", "La educación es importante", "¡Trabajo, trabajo, trabajo!"]
+                },
+                quico: {
+                    chavo: ["¡Chavo, no me simpatizas!", "Mi mamá me va a comprar uno mejor", "¡Qué bonito, qué bonito!"],
+                    kiko: ["Kiko, tu papá no tiene tanto dinero como el mío", "¡Vamos a jugar!", "¿Quieres ver mis juguetes?"],
+                    chilindrina: ["Chilindrina, eres una molestia", "¡No quiero ser tu novio!", "Tu papá no tiene trabajo"],
+                    donramon: ["Don Ramón, mi mamá dice que usted es un vago", "¿Cuándo va a pagar la renta?", "¡Trabaje, hombre!"],
+                    popis: ["Popis, eres mi mejor amiga", "Tu papá es muy rico", "Vamos a jugar a la casita"],
+                    profesor: ["Profesor, mi mamá dice que soy muy inteligente", "¿Puedo ser el monitor?", "¡Qué aburrido!"]
+                },
+                popis: {
+                    chavo: ["Chavo, eres muy ordinario", "No quiero jugar contigo", "Eso es de pobres"],
+                    kiko: ["Kiko, tus juguetes son muy viejos", "Mi papá me compra cosas mejores", "No me gusta jugar contigo"],
+                    chilindrina: ["Chilindrina, tu vestido está muy feo", "Eres muy pobre", "No quiero ser tu amiga"],
+                    donramon: ["Don Ramón, usted es un vago", "Mi papá dice que debería trabajar", "¿Cuándo va a pagar lo que debe?"],
+                    quico: ["Quico, eres mi mejor amigo", "Tu mamá es muy gorda pero simpática", "Vamos a jugar a las muñecas"],
+                    profesor: ["Profesor, mi papá dice que la educación es muy importante", "Quiero ser la mejor alumna", "¡Qué ordinario!"]
+                },
+                profesor: {
+                    chavo: ["Chavo, debes prestar más atención en clase", "La educación es fundamental", "¡Buenos días tengan ustedes!"],
+                                       kiko: ["Kiko, no hagas tantas travesuras", "Debes aplicar el conocimiento", "La disciplina es importante"],
+                    chilindrina: ["Chilindrina, eres una alumna muy aplicada", "Sigue así", "La educación te abrirá muchas puertas"],
+                    donramon: ["Don Ramón, la educación es el camino al progreso", "Debe dar el ejemplo a su hija", "El conocimiento es poder"],
+                    quico: ["Quico, no presumas tanto", "La humildad es una virtud", "Debes compartir tus conocimientos"],
+                    popis: ["Popis, no seas tan engreída", "Todos somos iguales en el aula", "La educación nos hace mejores personas"]
+                }
+            };
+            
+            let dialogText = "¡Hola!";
+            
+            if (dialogs[char1] && dialogs[char1][char2]) {
+                const possibleDialogs = dialogs[char1][char2];
+                dialogText = possibleDialogs[Math.floor(Math.random() * possibleDialogs.length)];
+            } else if (dialogs[char2] && dialogs[char2][char1]) {
+                const possibleDialogs = dialogs[char2][char1];
+                dialogText = possibleDialogs[Math.floor(Math.random() * possibleDialogs.length)];
+            }
+            
+            showDialog(char1, dialogText);
+            
+            // Reproducir voz del personaje
+            playCharacterVoice(char1);
+            
+            // Respuesta automática después de un tiempo
+            setTimeout(() => {
+                const responses = {
+                    chavo: ["¡Ta, ta, ta, tá!", "¡Es que no me tienen paciencia!", "Se me escapó un pedorrito..."],
+                    kiko: ["¡Se me chispoteó!", "¡Cuenta conmigo!", "¡Vamos!"],
+                    chilindrina: ["¡Papá, papá!", "¡Eso, eso, eso!", "¡Qué divertido!"],
+                    donramon: ["¡Trabajo, trabajo, trabajo!", "¡Ay, qué pereza!", "¡La vecindad está cada vez más cara!"],
+                    quico: ["¡Mi mamá me lo va a comprar!", "¡No me simpatizas!", "¡Qué bonito!"],
+                    popis: ["¡Qué ordinario!", "¡Mi papá tiene mucho dinero!", "¡No me hables!"],
+                    profesor: ["¡Buenos días tengan ustedes!", "La educación es importante", "Deben prestar atención"]
+                };
+                
+                if (responses[char2]) {
+                    const randomResponse = responses[char2][Math.floor(Math.random() * responses[char2].length)];
+                    showDialog(char2, randomResponse);
+                    playCharacterVoice(char2);
+                }
+            }, 2000);
+        }
+        
+        function playCharacterVoice(character) {
+            if (!sfxEnabled) return;
+            
+            let voiceAudio;
+            switch(character) {
+                case 'chavo':
+                    voiceAudio = chavoVoice;
+                    break;
+                case 'kiko':
+                    voiceAudio = kikoVoice;
+                    break;
+                case 'chilindrina':
+                    voiceAudio = chilindrinaVoice;
+                    break;
+                case 'donramon':
+                    voiceAudio = donramonVoice;
+                    break;
+                case 'quico':
+                    voiceAudio = quicoVoice;
+                    break;
+                case 'popis':
+                    voiceAudio = popisVoice;
+                    break;
+                case 'profesor':
+                    voiceAudio = profesorVoice;
+                    break;
+                default:
+                    voiceAudio = dialogSound;
+            }
+            
+            voiceAudio.currentTime = 0;
+            voiceAudio.play().catch(e => console.log("Error reproduciendo voz:", e));
+        }
+        
+        function interactWithCharacters() {
+            const interactions = {
+                chavo: [
+                    "¡Hola a todos!",
+                    "¿Qué pasó, qué pasó, qué pasó?",
+                    "¡Vamos a jugar a la pelota!",
+                    "¿Alguien quiere un sandwich de jamón?",
+                    "¡Barriga, no me hagas ruido!"
+                ],
+                kiko: [
+                    "¡Se me chispoteó!",
+                    "¡Vamos a jugar!",
+                    "Mi papá me va a comprar un helado",
+                    "¡Qué aburrido!"
+                ],
+                chilindrina: [
+                    "¡Papá, papá!",
+                    "¡Eso, eso, eso!",
+                    "Chavo, ¿quieres ser mi novio?",
+                    "¡Qué divertido!"
+                ],
+                donramon: [
+                    "¡Trabajo, trabajo, trabajo!",
+                    "¡Ay, qué pereza!",
+                    "Chavo, ¿no tendrás una torta?",
+                    "¡La vecindad está cada vez más cara!"
+                ],
+                quico: [
+                    "¡Mi mamá me lo va a comprar!",
+                    "¡No me simpatizas!",
+                    "¡Qué bonito!",
+                    "¡Todos me envidian!"
+                ],
+                popis: [
+                    "¡Qué ordinario!",
+                    "¡Mi papá tiene mucho dinero!",
+                    "No me hables",
+                    "Eso es de pobres"
+                ],
+                profesor: [
+                    "¡Buenos días tengan ustedes!",
+                    "La educación es fundamental",
+                    "Deben prestar atención",
+                    "El conocimiento es poder"
+                ]
+            };
+            
+            const randomInteraction = interactions[selectedCharacter][Math.floor(Math.random() * interactions[selectedCharacter].length)];
+            showDialog(selectedCharacter, randomInteraction);
+            playCharacterVoice(selectedCharacter);
+            
+            // Respuesta de otros personajes cercanos
+            setTimeout(() => {
+                const currentChar = characters[selectedCharacter];
+                const others = Object.keys(characters).filter(char => char !== selectedCharacter);
+                
+                others.forEach(other => {
+                    const distance = Math.sqrt(
+                        Math.pow(currentChar.x - characters[other].x, 2) + 
+                        Math.pow(currentChar.y - characters[other].y, 2)
+                    );
+                    
+                    if (distance < 150) {
+                        const responses = {
+                            chavo: ["¡Yo quiero!", "¡Cuenta conmigo!", "¡Vamos!", "¡Ta, ta, ta, tá!"],
+                            kiko: ["¡Yo quiero!", "¡Cuenta conmigo!", "¡Vamos!", "¡Se me chispoteó!"],
+                            chilindrina: ["¡Yo también!", "¡Qué divertido!", "¡Sí, por favor!", "¡Eso, eso, eso!"],
+                            donramon: ["¡Ay, qué pereza!", "Después de comer", "¡Trabajar es mejor!", "¡Qué flojera!"],
+                            quico: ["¡Mi mamá me lo compra mejor!", "¡No me interesa!", "¡Qué ordinario!", "¡Yo tengo uno mejor!"],
+                            popis: ["¡Qué ordinario!", "No me interesa", "Eso es de pobres", "Mi papá lo hace mejor"],
+                            profesor: ["Muy bien, jóvenes", "Excelente idea", "La educación primero", "Muy interesante"]
+                        };
+                        
+                        if (responses[other]) {
+                            const randomResponse = responses[other][Math.floor(Math.random() * responses[other].length)];
+                            setTimeout(() => {
+                                showDialog(other, randomResponse);
+                                playCharacterVoice(other);
+                            }, Math.random() * 1000 + 500);
+                        }
+                    }
+                });
+            }, 1000);
+        }
+        
+        function showDialog(character, text) {
+            const dialog = document.getElementById(`${character}-dialog`);
+            if (dialog) {
+                dialog.textContent = text;
+                dialog.style.display = 'block';
+                
+                setTimeout(() => {
+                    dialog.style.display = 'none';
+                }, 3000);
+            }
+        }
+        
+        // Funcionalidad del chat mejorado
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message === '') return;
+            
+            // Agregar mensaje del usuario
+            addMessage(message, 'user');
+            
+            // Limpiar input
+            chatInput.value = '';
+            
+            // Simular respuesta después de un breve retraso
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 500);
+        }
+        
+        function useSuggestion(element) {
+            chatInput.value = element.textContent;
+            sendMessage();
+        }
+        
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            messageDiv.textContent = text;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Saludos y estado
+            if (lowerMessage.includes('hola') || lowerMessage.includes('buenos días') || lowerMessage.includes('buenas tardes')) {
+                return '¡Hola! Soy el Chavo del 8. ¿Quieres jugar conmigo?';
+            } else if (lowerMessage.includes('cómo estás') || lowerMessage.includes('qué tal') || lowerMessage.includes('como estas')) {
+                return '¡Andamos bien, gracias! Aunque a veces me da hambre, pero en la vecindad siempre nos divertimos.';
+            } else if (lowerMessage.includes('adiós') || lowerMessage.includes('chao') || lowerMessage.includes('hasta luego')) {
+                return '¡Chao, cuídate! ¡Nos vemos en la vecindad! ¡Ta, ta, ta, tá!';
+            
+            // Preguntas sobre personajes
+            } else if (lowerMessage.includes('chavo')) {
+                return '¡Ese soy yo! Me llaman el Chavo del 8 porque vivo en el departamento 8. A veces me meto en problemas sin querer, pero siempre con buena intención. ¡Fue sin querer queriendo!';
+            } else if (lowerMessage.includes('kiko')) {
+                return 'Kiko es mi mejor amigo. A veces se enoja conmigo, pero siempre terminamos jugando juntos. ¡Se le chispotea decir cosas sin pensar!';
+            } else if (lowerMessage.includes('chilindrina')) {
+                return 'La Chilindrina es la hija de Don Ramón. Es muy lista y siempre se sale con la suya. A veces me dice que quiere ser mi novia, ¡pero yo solo quiero jugar!';
+            } else if (lowerMessage.includes('don ramón') || lowerMessage.includes('donramon')) {
+                return 'Don Ramón es el papá de la Chilindrina. Siempre está buscando trabajo pero le gusta más dormir la siesta. ¡Trabajo, trabajo, trabajo!';
+            } else if (lowerMessage.includes('quico')) {
+                return 'Quico es un poco presumido porque su mamá le compra muchos juguetes. Siempre dice "¡Mi mamá me lo compra!". A veces nos peleamos, pero también jugamos juntos.';
+            } else if (lowerMessage.includes('señor barriga')) {
+                return '¡El señor Barriga! Siempre viene a cobrar la renta y Don Ramón se esconde. Es gordito pero buen hombre.';
+            } else if (lowerMessage.includes('doña florinda')) {
+                return 'Doña Florinda es la mamá de Quico. Siempre me grita "¡Fuera, fuera de aquí!" pero en el fondo es buena persona.';
+            } else if (lowerMessage.includes('profesor')) {
+                return 'El profesor Jirafales es nuestro maestro. Siempre llega con su "Buenos días tengan ustedes" y se enoja cuando no sabemos la lección.';
+            } else if (lowerMessage.includes('popis')) {
+                return 'Popis es la amiga de Quico. Es muy presumida y siempre dice que las cosas son "ordinarias". Su papá tiene mucho dinero.';
+            } else if (lowerMessage.includes('ñoño')) {
+                return 'Ñoño es el hijo del profesor Jirafales. Es un poco glotón y siempre tiene hambre. Es buen amigo.';
+            
+            // Preguntas sobre lugares
+            } else if (lowerMessage.includes('vecindad') || lowerMessage.includes('dónde vives')) {
+                return 'Vivo en la vecindad del Señor Barriga. Es un lugar muy divertido con muchos amigos. Tengo mi propio barril donde duermo, aunque a veces me meto al departamento 8.';
+            } else if (lowerMessage.includes('barril')) {
+                return '¡Ah, mi barril! Es donde duermo cuando no estoy en el departamento 8. Es cómodo, aunque a veces hace frío.';
+            
+            // Preguntas sobre comida
+            } else if (lowerMessage.includes('comida') || lowerMessage.includes('sandwich') || lowerMessage.includes('torta') || lowerMessage.includes('jamón')) {
+                return '¡Me encanta el sandwich de jamón! Pero casi nunca tengo para comer. A veces Don Ramón me compra uno, o la Señorita Popis me invita. ¡Tengo mucha hambre!';
+            
+            // Preguntas sobre actividades
+            } else if (lowerMessage.includes('jugar') || lowerMessage.includes('juego') || lowerMessage.includes('pelota')) {
+                return '¡Me encanta jugar! Con Kiko jugamos a la pelota, aunque a veces se nos va al patio de Doña Florinda. También jugamos escondidas y a las canicas.';
+            } else if (lowerMessage.includes('escuela') || lowerMessage.includes('clase')) {
+                return 'Voy a la escuela con el profesor Jirafales. A veces no entiendo las lecciones, pero el profesor es muy paciente. ¡Buenos días tengan ustedes!';
+            
+            // Preguntas específicas
+            } else if (lowerMessage.includes('mejor amigo')) {
+                return 'Mi mejor amigo es Kiko, aunque a veces nos peleamos. También me llevo bien con la Chilindrina, pero ella siempre me quiere hacer su novio.';
+            } else if (lowerMessage.includes('por qué te llaman chavo del 8')) {
+                return 'Me llaman el Chavo del 8 porque vivo en el departamento 8 de la vecindad. Aunque a veces duermo en mi barril cuando hace buen tiempo.';
+            } else if (lowerMessage.includes('hambre')) {
+                return '¡Siempre tengo hambre! A veces Don Ramón me compra un taco, o Doña Florinda me da algo de comer cuando no está enojada conmigo. Mi comida favorita es el sandwich de jamón.';
+            } else if (lowerMessage.includes('personaje más divertido')) {
+                return '¡Todos somos divertidos! Kiko hace reír con sus "chispoteos", la Chilindrina con sus "eso, eso, eso", Don Ramón con su "trabajo, trabajo, trabajo" y Quico con sus "mi mamá me lo compra".';
+            
+            // Preguntas generales
+            } else if (lowerMessage.includes('qué pasa en la vecindad')) {
+                return '¡Siempre pasa algo divertido! A veces Don Ramón se esconde del señor Barriga, o Quico presume sus juguetes nuevos, o la Chilindrina inventa algún juego. ¡Nunca nos aburrimos!';
+            } else if (lowerMessage.includes('qué haces')) {
+                return '¡Jugar! Siempre estoy jugando con mis amigos. A veces también ayudo a Don Ramón con sus trabajos, o voy a la escuela con el profesor Jirafales.';
+            } else if (lowerMessage.includes('tienes novia')) {
+                return '¡No! La Chilindrina siempre dice que quiere ser mi novia, pero yo solo quiero jugar. Las niñas son complicadas.';
+            } else if (lowerMessage.includes('qué te gusta')) {
+                return '¡Me gusta jugar, comer sandwich de jamón, y estar con mis amigos en la vecindad! A veces también me gusta molestar a Doña Florinda, pero sin querer.';
+            } else if (lowerMessage.includes('edad') || lowerMessage.includes('años')) {
+                return 'No sé exactamente cuántos años tengo, pero soy un niño. El profesor Jirafales dice que debo ir a la escuela, así que supongo que tengo edad para eso.';
+            
+            // Respuestas genéricas
+            } else if (lowerMessage.includes('gracias')) {
+                return '¡De nada! ¡Ahora me voy a mi barril!';
+            } else if (lowerMessage.includes('nombre')) {
+                return 'Me llaman el Chavo del 8, porque vivo en el departamento 8. ¿Y tú cómo te llamas?';
+            } else {
+                // Si no reconoce la pregunta, dar una respuesta genérica pero relacionada
+                const genericResponses = [
+                    '¡Fue sin querer queriendo!',
+                    '¡Es que no me tienen paciencia!',
+                    'Se me escapó un pedorrito...',
+                    '¡Ta, ta, ta, tá!',
+                    '¡Barriga, no me hagas ruido!',
+                    'Mejor vamos a jugar a la pelota',
+                    'Tengo hambre, ¿no habrá una torta?',
+                    '¡Qué bonito! ¡Qué bonito!',
+                    '¡No me simpatizas!',
+                    '¡Eso, eso, eso!',
+                    'No entendí bien, ¿puedes explicarme otra vez?',
+                    '¡Vamos a jugar! Es más divertido que estar hablando',
+                    '¿Has visto a Don Ramón? Creo que se escondió del señor Barriga otra vez',
+                    'En la vecindad siempre hay algo divertido que hacer',
+                    '¿Quieres que te cuente más sobre mis amigos?'
+                ];
+                return genericResponses[Math.floor(Math.random() * genericResponses.length)];
+            }
+        }
+        
+        // Permitir enviar mensaje con Enter
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Funcionalidad del editor de notas avanzado
+        const noteTextarea = document.getElementById('note-textarea');
+        const notification = document.getElementById('notification');
+        const charCount = document.getElementById('char-count');
+        const wordCountElem = document.getElementById('word-count');
+        const saveTime = document.getElementById('save-time');
+        
+        // Actualizar contadores en tiempo real
+        noteTextarea.addEventListener('input', function() {
+            const text = this.value;
+            charCount.textContent = `${text.length} caracteres`;
+            wordCountElem.textContent = `${text.trim() === '' ? 0 : text.trim().split(/\s+/).length} palabras`;
+        });
+        
+        function saveNote() {
+            const noteContent = noteTextarea.value;
+            localStorage.setItem('savedNote', noteContent);
+            
+            // Actualizar hora de guardado
+            const now = new Date();
+            saveTime.textContent = `Guardado: ${now.toLocaleTimeString()}`;
+            
+            // Mostrar notificación
+            notification.textContent = '¡Nota guardada correctamente!';
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+        
+        function loadNote() {
+            const savedNote = localStorage.getItem('savedNote');
+            if (savedNote) {
+                noteTextarea.value = savedNote;
+                noteTextarea.dispatchEvent(new Event('input')); // Actualizar contadores
+                notification.textContent = '¡Nota cargada correctamente!';
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 2000);
+            } else {
+                notification.textContent = 'No hay notas guardadas';
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 2000);
+            }
+        }
+        
+        function clearNote() {
+            noteTextarea.value = '';
+            noteTextarea.dispatchEvent(new Event('input')); // Actualizar contadores
+            notification.textContent = '¡Nota borrada!';
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+        
+        function formatText(type) {
+            const start = noteTextarea.selectionStart;
+            const end = noteTextarea.selectionEnd;
+            const selectedText = noteTextarea.value.substring(start, end);
+            let formattedText = selectedText;
+            
+            switch(type) {
+                case 'bold':
+                    formattedText = `**${selectedText}**`;
+                    break;
+                case 'italic':
+                    formattedText = `*${selectedText}*`;
+                    break;
+                case 'underline':
+                    formattedText = `__${selectedText}__`;
+                    break;
+            }
+            
+            noteTextarea.setRangeText(formattedText, start, end, 'select');
+            noteTextarea.focus();
+        }
+        
+        function insertDate() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString();
+            const cursorPos = noteTextarea.selectionStart;
+            const textBefore = noteTextarea.value.substring(0, cursorPos);
+            const textAfter = noteTextarea.value.substring(cursorPos);
+            
+            noteTextarea.value = textBefore + dateStr + textAfter;
+            noteTextarea.selectionStart = cursorPos + dateStr.length;
+            noteTextarea.selectionEnd = cursorPos + dateStr.length;
+            noteTextarea.focus();
+        }
+        
+        function wordCount() {
+            const text = noteTextarea.value;
+            const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            const chars = text.length;
+            
+            notification.textContent = `Palabras: ${words} | Caracteres: ${chars}`;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+        
+        function exportNote() {
+            const text = noteTextarea.value;
+            if (text.trim() === '') {
+                notification.textContent = 'No hay contenido para exportar';
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 2000);
+                return;
+            }
+            
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'nota_chavo.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            notification.textContent = '¡Nota exportada correctamente!';
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+        
+        // Funcionalidad de encuestas - CORREGIDA
+        let votes = {
+            chavo: 0,
+            kiko: 0,
+            chilindrina: 0,
+            donramon: 0,
+            quico: 0,
+            popis: 0,
+            profesor: 0
+        };
+        
+        // Cargar votos guardados si existen
+        const savedVotes = localStorage.getItem('pollVotes');
+        if (savedVotes) {
+            try {
+                const parsedVotes = JSON.parse(savedVotes);
+                // Verificar que todos los valores sean números
+                Object.keys(votes).forEach(key => {
+                    if (parsedVotes[key] !== undefined && !isNaN(parsedVotes[key])) {
+                        votes[key] = parseInt(parsedVotes[key]);
+                    }
+                });
+                updatePollDisplay();
+            } catch(e) {
+                console.log("Error cargando votos:", e);
+                // Si hay error, reiniciar votos
+                resetVotes();
+            }
+        }
+        
+        function resetVotes() {
+            votes = {
+                chavo: 0,
+                kiko: 0,
+                chilindrina: 0,
+                donramon: 0,
+                quico: 0,
+                popis: 0,
+                profesor: 0
+            };
+            localStorage.setItem('pollVotes', JSON.stringify(votes));
+            updatePollDisplay();
+            notification.textContent = '¡Encuesta reiniciada!';
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+        
+        function vote(option) {
+            votes[option]++;
+            localStorage.setItem('pollVotes', JSON.stringify(votes));
+            updatePollDisplay();
+            
+            // Mostrar notificación
+            notification.textContent = `¡Votaste por ${getCharacterName(option)}!`;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+        
+        function addCharacterToPoll() {
+            const newCharName = document.getElementById('new-character-name').value.trim();
+            if (newCharName === '') {
+                notification.textContent = 'Por favor ingresa un nombre para el personaje';
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 2000);
+                return;
+            }
+            
+            const newCharId = newCharName.toLowerCase().replace(/\s+/g, '');
+            
+            if (votes[newCharId] !== undefined) {
+                notification.textContent = '¡Este personaje ya existe en la encuesta!';
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 2000);
+                return;
+            }
+            
+            // Agregar nuevo personaje a la encuesta
+            votes[newCharId] = 0;
+            
+            // Crear elemento HTML para el nuevo personaje
+            const pollOptions = document.querySelector('.poll-options');
+            const newOption = document.createElement('div');
+            newOption.className = 'poll-option';
+            newOption.onclick = () => vote(newCharId);
+            newOption.innerHTML = `
+                <span>${newCharName}</span>
+                <span id="votes-${newCharId}">0 votos</span>
+                <div class="poll-bar" id="bar-${newCharId}" style="width: 0%"></div>
+            `;
+            
+            pollOptions.appendChild(newOption);
+            
+            // Actualizar localStorage
+            localStorage.setItem('pollVotes', JSON.stringify(votes));
+            
+            // Actualizar display
+            updatePollDisplay();
+            
+            // Limpiar input
+            document.getElementById('new-character-name').value = '';
+            
+            notification.textContent = `¡${newCharName} añadido a la encuesta!`;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+        
+        function getCharacterName(key) {
+            const names = {
+                chavo: 'El Chavo',
+                kiko: 'Kiko',
+                chilindrina: 'Chilindrina',
+                donramon: 'Don Ramón',
+                quico: 'Quico',
+                popis: 'Popis',
+                profesor: 'Profesor'
+            };
+            return names[key] || key.charAt(0).toUpperCase() + key.slice(1);
+        }
+        
+        function updatePollDisplay() {
+            // Calcular total de votos
+            const totalVotes = Object.values(votes).reduce((a, b) => a + b, 0);
+            
+            // Actualizar contadores de votos
+            Object.keys(votes).forEach(option => {
+                const voteElement = document.getElementById(`votes-${option}`);
+                if (voteElement) {
+                    voteElement.textContent = `${votes[option]} votos`;
+                }
+                
+                // Actualizar barras de progreso
+                const barElement = document.getElementById(`bar-${option}`);
+                if (barElement && totalVotes > 0) {
+                    const percentage = (votes[option] / totalVotes) * 100;
+                    barElement.style.width = `${percentage}%`;
+                } else if (barElement) {
+                    barElement.style.width = `0%`;
+                }
+            });
+            
+            // Actualizar estadísticas
+            const totalVotesElement = document.getElementById('total-votes');
+            if (totalVotesElement) {
+                totalVotesElement.textContent = totalVotes;
+            }
+            
+            // Encontrar personaje líder
+            let leadingChar = '-';
+            let maxVotes = 0;
+            
+            Object.keys(votes).forEach(option => {
+                if (votes[option] > maxVotes) {
+                    maxVotes = votes[option];
+                    leadingChar = getCharacterName(option);
+                }
+            });
+            
+            const leadingCharElement = document.getElementById('leading-char');
+            if (leadingCharElement) {
+                leadingCharElement.textContent = leadingChar;
+            }
+            
+            // Actualizar gráfico
+            updateChart();
+        }
+        
+        // Gráfico de resultados
+        let pollChart = null;
+        
+        function updateChart() {
+            const ctx = document.getElementById('poll-chart');
+            if (!ctx) return;
+            
+            // Destruir gráfico anterior si existe
+            if (pollChart) {
+                pollChart.destroy();
+            }
+            
+            // Preparar datos para el gráfico
+            const labels = Object.keys(votes).map(key => getCharacterName(key));
+            const data = Object.values(votes);
+            const backgroundColors = [
+                'rgba(255, 235, 59, 0.7)',
+                'rgba(33, 150, 243, 0.7)',
+                'rgba(233, 30, 99, 0.7)',
+                'rgba(76, 175, 80, 0.7)',
+                'rgba(156, 39, 176, 0.7)',
+                'rgba(255, 152, 0, 0.7)',
+                'rgba(96, 125, 139, 0.7)',
+                'rgba(121, 85, 72, 0.7)',
+                'rgba(244, 67, 54, 0.7)',
+                'rgba(0, 188, 212, 0.7)'
+            ];
+            
+            // Crear nuevo gráfico
+            pollChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: backgroundColors.slice(0, labels.length),
+                        borderColor: backgroundColors.map(color => color.replace('0.7', '1')).slice(0, labels.length),
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true,
+                        duration: 1000
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: 'white',
+                                font: {
+                                    size: 12
+                                },
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                                    return `${label}: ${value} votos (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Inicializar controles de audio
+        function toggleMusic() {
+            musicEnabled = !musicEnabled;
+            if (musicEnabled) {
+                backgroundMusic.play().catch(e => console.log("Error reproduciendo música:", e));
+                document.getElementById('music-toggle').style.background = 'var(--primary)';
+                notification.textContent = 'Música activada';
+            } else {
+                backgroundMusic.pause();
+                document.getElementById('music-toggle').style.background = 'var(--dark)';
+                notification.textContent = 'Música desactivada';
+            }
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+        
+        function toggleSFX() {
+            sfxEnabled = !sfxEnabled;
+            document.getElementById('sfx-toggle').style.background = sfxEnabled ? 'var(--primary)' : 'var(--dark)';
+            notification.textContent = sfxEnabled ? 'Efectos de sonido activados' : 'Efectos de sonido desactivados';
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+        
+        // Inicializar al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar gráfico
+            updateChart();
+            
+            // Cargar nota guardada si existe
+            loadNote();
+            
+            // Resaltar personaje seleccionado inicialmente
+            document.getElementById('chavo').style.border = '3px solid yellow';
+            
+            // Inicializar controles de audio
+            document.getElementById('music-toggle').addEventListener('click', toggleMusic);
+            document.getElementById('sfx-toggle').addEventListener('click', toggleSFX);
+            
+            // Reproducir música de fondo automáticamente
+            setTimeout(() => {
+                backgroundMusic.play().catch(e => {
+                    console.log("La reproducción automática de audio fue bloqueada. Haz clic en el botón de música para activarla.");
+                    notification.textContent = 'Haz clic en el botón de música para activar el audio';
+                    notification.style.display = 'block';
+                    setTimeout(() => {
+                        notification.style.display = 'none';
+                    }, 3000);
+                });
+            }, 1000);
+            
+            // Inicializar encuestas
+            updatePollDisplay();
+        });
+    </script>
+</body>
+</html>

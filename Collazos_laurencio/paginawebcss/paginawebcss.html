@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Avanzados de Estilos CSS</title>
+    <!-- Hoja de estilos externa -->
+    <link rel="stylesheet" href="estilos-externos.css" id="tema-css">
+    <link rel="stylesheet" href="estilos-oscuros.css" id="tema-css">
+    <link rel="stylesheet" href="estilo-inyterno.css" id="tema-css">
+ 
+</head>
+<body>
+    <!-- Header con estilos externos -->
+    <header>
+        <div class="container">
+            <h1>Ejercicios Avanzados de Estilos CSS</h1>
+            <p>Explorando la prioridad de estilos en línea, internos y externos</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Sección 1: Estilos en línea -->
+        <section id="seccion-en-linea" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); padding: 25px; border-radius: 15px; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-left: 8px solid #e74c3c;">
+            <h2 style="color: #c0392b; font-size: 28px; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">Sección 1: Estilos en Línea</h2>
+            <p style="color: #2c3e50; line-height: 1.6; font-size: 18px;">
+                Esta sección utiliza <strong>estilos en línea</strong> aplicados directamente a los elementos HTML mediante el atributo <code>style</code>. 
+                Los estilos en línea tienen la mayor prioridad en la cascada CSS y sobrescriben tanto los estilos internos como externos.
+            </p>
+            <div style="background-color: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                <h3 style="color: #e74c3c;">Características de los estilos en línea:</h3>
+                <ul style="color: #2c3e50;">
+                    <li>Máxima prioridad en la cascada CSS</li>
+                    <li>Aplicados directamente a elementos HTML</li>
+                    <li>Difíciles de mantener en proyectos grandes</li>
+                    <li>Útiles para estilos específicos y temporales</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Sección 2: Estilos internos -->
+        <section id="seccion-interna">
+            <h2>Sección 2: Estilos Internos</h2>
+            <p>
+                Esta sección utiliza <strong>estilos internos</strong> definidos dentro de la etiqueta <code>&lt;style&gt;</code> en el <code>&lt;head&gt;</code> del documento. 
+                Los estilos internos tienen mayor prioridad que los externos pero menor que los estilos en línea.
+            </p>
+            <div style="background-color: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                <h3 style="color: #2980b9;">Características de los estilos internos:</h3>
+                <ul style="color: #2c3e50;">
+                    <li>Prioridad media en la cascada CSS</li>
+                    <li>Definidos en la sección head del documento</li>
+                    <li>Más organizados que los estilos en línea</li>
+                    <li>Afectan solo al documento actual</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Sección 3: Estilos externos -->
+        <section id="seccion-externa">
+            <h2>Sección 3: Estilos Externos</h2>
+            <p>
+                Esta sección utiliza <strong>estilos externos</strong> definidos en un archivo CSS separado enlazado mediante la etiqueta <code>&lt;link&gt;</code>. 
+                Los estilos externos tienen la menor prioridad pero son los más recomendados para proyectos grandes.
+            </p>
+            <div class="info-estilos">
+                <h3>Características de los estilos externos:</h3>
+                <ul>
+                    <li>Menor prioridad en la cascada CSS</li>
+                    <li>Definidos en archivos separados (.css)</li>
+                    <li>Más fáciles de mantener y reutilizar</li>
+                    <li>Permiten consistencia en todo el sitio web</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Formulario con estilos mixtos -->
+        <section id="formulario-contacto">
+            <h2>Formulario de Contacto con Estilos Mixtos</h2>
+            <p>Este formulario combina los tres tipos de estilos CSS:</p>
+            
+            <form id="form-contacto">
+                <div class="campo-formulario">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre">
+                    <div class="mensaje-error" id="error-nombre">Por favor, ingresa tu nombre</div>
+                </div>
+                
+                <div class="campo-formulario">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                    <div class="mensaje-error" id="error-email">Por favor, ingresa un email válido</div>
+                </div>
+                
+                <div class="campo-formulario">
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje"></textarea>
+                    <div class="mensaje-error" id="error-mensaje">Por favor, escribe un mensaje</div>
+                </div>
+                
+                <div class="campo-formulario">
+                    <button type="submit" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: all 0.3s ease;">Enviar Mensaje</button>
+                    <button type="reset" style="background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 16px; margin-left: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: all 0.3s ease;">Limpiar</button>
+                </div>
+            </form>
+        </section>
+        
+        <!-- Tema dinámico -->
+        <section id="tema-dinamico">
+            <h2>Tema Dinámico con Prioridad de Estilos</h2>
+            <p>Cambia entre temas claro y oscuro para ver cómo interactúan los diferentes tipos de estilos:</p>
+            
+            <div style="margin: 20px 0;">
+                <button id="btn-tema-claro" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin-right: 10px;">Tema Claro</button>
+                <button id="btn-tema-oscuro" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">Tema Oscuro</button>
+            </div>
+            
+            <p>Este es un <span class="destacado" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">elemento destacado</span> con estilos en línea que mantiene su apariencia independientemente del tema seleccionado.</p>
+        </section>
+        
+        <!-- Landing page -->
+        <main>
+            <h2>Landing Page con Estilos Mixtos</h2>
+            <p>Esta sección demuestra una landing page con diferentes enfoques de estilos:</p>
+            
+            <div class="seccion-landing">
+                <h2>Características Principales</h2>
+                <div class="galeria">
+                    <div class="item-galeria">
+                        <h3>Responsive</h3>
+                        <p>Se adapta a cualquier dispositivo</p>
+                    </div>
+                    <div class="item-galeria">
+                        <h3>Colorido</h3>
+                        <p>Diseño vibrante y atractivo</p>
+                    </div>
+                    <div class="item-galeria">
+                        <h3>Interactivo</h3>
+                        <p>Elementos que responden al usuario</p>
+                    </div>
+                    <div class="item-galeria">
+                        <h3>Moderno</h3>
+                        <p>Técnicas CSS actuales</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="seccion-landing">
+                <h2>Nuestros Servicios</h2>
+                <p>Ofrecemos una amplia gama de servicios para satisfacer tus necesidades:</p>
+                <ul>
+                    <li>Diseño web personalizado</li>
+                    <li>Desarrollo de aplicaciones</li>
+                    <li>Consultoría tecnológica</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Footer con estilos en línea -->
+    <footer style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; text-align: center; padding: 30px; margin-top: 40px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1);">
+        <div class="container">
+            <p style="margin: 0; font-size: 18px; font-weight: bold;">&copy; 2023 - Ejercicios  de CSS</p>
+            <p style="margin: 10px 0 0; font-size: 16px; opacity: 0.8;">Demostración de prioridad de estilos CSS</p>
+        </div>
+    </footer>
+  <script src="script.js"></script>
+
+</body>
+</html>

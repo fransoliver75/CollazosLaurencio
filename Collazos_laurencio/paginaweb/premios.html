@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel ajustado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde: #b8ff95;
+            --morado: #822bff;
+            --blanco: #fff;
+        }
+
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            font-family:"Montserrat",sans-serif;
+            background:#20002b;
+            color:var(--blanco);
+            overflow-x:hidden;
+        }
+
+        /* HEADER */
+        header{
+            position:fixed;
+            top:20px;left:0;right:0;
+            display:flex;
+            align-items:center;
+            justify-content:flex-end; /* empuja el nav hacia la derecha */
+            z-index:100;
+        }
+        .logo{
+            position:absolute;
+            top:0;left:20px;
+            transform:rotate(-18deg);
+        }
+        .logo img{height:55px;display:block}
+
+        nav{
+            margin-right:200px; /* acerca el menú hacia el login */
+            margin-top:10px;    /* un poquito más abajo */
+        }
+        nav .nav-pill{
+            display:flex;
+            background:#fff;
+            padding:6px 16px;
+            border-radius:30px;
+            gap:12px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        }
+        nav .nav-pill li{list-style:none}
+        nav .nav-pill a{
+            text-decoration:none;
+            font-weight:600;
+            color:#111;
+            padding:6px 10px;
+            border-radius:10px;
+            font-size:13px;
+            transition:.2s;
+        }
+        nav .nav-pill a.active{
+            background:linear-gradient(90deg,#e3ccff,#f5eaff);
+            color:var(--morado);
+        }
+        .btn-login{
+            position:absolute;
+            right:20px;
+            top:0;
+            padding:10px 22px; /* más grande */
+            border-radius:30px;
+            background:linear-gradient(90deg,#a7ffd6,#cfa7ff);
+            font-weight:700;
+            font-size:15px;
+            color:#000;
+            text-decoration:none;
+            box-shadow:0 4px 12px rgba(0,0,0,0.25);
+        }
+
+        /* HERO + CARRUSEL */
+        .hero{
+            position:relative;
+            min-height:100vh;
+            width:100%;
+            overflow:hidden;
+            display:flex;
+            justify-content:flex-start; /* que empiece un poco más a la izquierda */
+            align-items:flex-end;
+            padding-left:12%; /* controla la posición horizontal del texto */
+        }
+
+        .carousel{
+            position:absolute;
+            inset:0;
+            width:100%;
+            height:100%;
+            overflow:hidden;
+        }
+        .carousel-track{
+            display:flex;
+            height:100%;
+            width:100%;
+            transition:transform 1s ease-in-out;
+        }
+        .carousel-track img{
+            flex:0 0 100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        .hero::after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:linear-gradient(to top,rgba(39,0,62,0.9) 10%,rgba(0,0,0,0) 60%);
+            z-index:2;
+        }
+
+        .hero .content{
+            position:relative;
+            z-index:3;
+            text-align:left;  /* alineado a la izquierda pero no extremo */
+            margin-bottom:80px;
+        }
+        .hero .content h1{
+            font-size:clamp(42px,7vw,70px);
+            color:var(--verde);
+            margin:0;
+        }
+        .hero .content p{
+            font-size:24px;
+            font-weight:700;
+            margin-top:10px;
+        }
+        .hero .content .cta{margin-top:18px}
+        .btn-sub{
+            padding:12px 30px;
+            border-radius:30px;
+            border:0;
+            font-weight:700;
+            font-size:16px;
+            background:linear-gradient(90deg,#9fffd6,#cfa7ff);
+            color:#222;
+            cursor:pointer;
+            box-shadow:0 5px 15px rgba(0,0,0,0.25);
+            transition:.2s;
+        }
+        .btn-sub:hover{transform:scale(1.05)}
+
+        /* SECCIÓN CUENTA REGRESIVA */
+        .countdown-section {
+            background: linear-gradient(135deg, #2e0050, #7c00a3);
+            padding: 80px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: #333;
+        }
+
+        .countdown-title {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 48px;
+            color: #822bff;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown-subtitle {
+            font-size: 22px;
+            color: #555;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .timer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timer-value {
+            background: linear-gradient(135deg, #822bff, #a366ff);
+            color: white;
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: 800;
+            box-shadow: 0 8px 20px rgba(130, 43, 255, 0.4);
+            margin-bottom: 10px;
+        }
+
+        .timer-label {
+            font-size: 16px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .countdown-info {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+            margin: 30px 0;
+        }
+
+        .sorteo-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .sorteo-date {
+            font-size: 18px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .premio {
+            font-size: 22px;
+            color: #822bff;
+            font-weight: 800;
+        }
+
+        .btn-participar {
+            background: linear-gradient(135deg, #822bff, #a366ff);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(130, 43, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-participar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(130, 43, 255, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .countdown-timer {
+                gap: 15px;
+            }
+            
+            .timer-value {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+            
+            .sorteo-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .countdown-title {
+                font-size: 36px;
+            }
+            
+            .countdown-subtitle {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="imagen.jpg" alt="Logo"></div>
+        <nav>
+            <ul class="nav-pill">
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="#">Premios</a></li>
+                <li><a href="#">Ganadores</a></li>
+                <li><a href="#">Beneficios</a></li>
+                <li><a href="#">¿Cómo funciona?</a></li>
+                <li><a href="#">Suscripción</a></li>
+            </ul>
+        </nav>
+        <a href="login.html" class="btn-login">Iniciar sesión</a>
+    </header>
+
+    <section class="hero">
+        <div class="carousel">
+            <div class="carousel-track">
+                <img src="portada.jpg" alt="Fondo 1">
+                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Fondo 2">
+                <img src="portada2.png" alt="Fondo 3">
+                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Fondo 1 clon">
+            </div>
+        </div>
+
+        <div class="content">
+            <h1>PREMIOS INCREÍBLES</h1>
+            <p>todas las semanas</p>
+            <div class="cta">
+                <button class="btn-sub">Quiero suscribirme</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CUENTA REGRESIVA -->
+    <section class="countdown-section">
+        <div class="countdown-container">
+            <h2 class="countdown-title">HermantQ no te duermas!</h2>
+            <p class="countdown-subtitle">Nuestra próxima edición en:</p>
+            
+            <div class="countdown-timer">
+                <div class="timer-item">
+                    <div class="timer-value" id="days">06</div>
+                    <div class="timer-label">días</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-value" id="hours">16</div>
+                    <div class="timer-label">horas</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-value" id="minutes">10</div>
+                    <div class="timer-label">minutos</div>
+                </div>
+            </div>
+            
+            <p class="countdown-info">Todos los jueves desde las 4:30 pm</p>
+            
+            <div class="divider"></div>
+            
+            <div class="sorteo-info">
+                <div class="sorteo-date">Sorteo jue. 30 oct</div>
+                <div class="premio">Premiazo</div>
+            </div>
+            
+            <p class="countdown-info">Participa por BMW XI 2025</p>
+            
+            <button class="btn-participar">¡Participar ya!</button>
+        </div>
+    </section>
+
+    <script>
+        // Carrusel
+        const track = document.querySelector(".carousel-track");
+        const slides = document.querySelectorAll(".carousel-track img");
+        let index = 0;
+
+        function moveSlide(){
+            index++;
+            track.style.transition = "transform 1s ease-in-out";
+            track.style.transform = `translateX(-${index * 100}%)`;
+
+            if(index === slides.length - 1){
+                setTimeout(()=>{
+                    track.style.transition = "none";
+                    track.style.transform = "translateX(0)";
+                    index = 0;
+                },1000);
+            }
+        }
+        setInterval(moveSlide, 4000);
+
+        // Cuenta regresiva real
+        function updateCountdown() {
+            // Establecer la fecha objetivo (jueves próximo a las 4:30 PM)
+            const now = new Date();
+            const target = new Date();
+            
+            // Encontrar el próximo jueves
+            const daysUntilThursday = (4 - now.getDay() + 7) % 7;
+            target.setDate(now.getDate() + daysUntilThursday);
+            target.setHours(16, 30, 0, 0); // 4:30 PM
+            
+            // Si ya pasó el jueves de esta semana, ir al próximo
+            if (now > target) {
+                target.setDate(target.getDate() + 7);
+            }
+            
+            const diff = target - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        }
+
+        // Actualizar la cuenta regresiva cada minuto
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+    </script>
+</body>
+</html>

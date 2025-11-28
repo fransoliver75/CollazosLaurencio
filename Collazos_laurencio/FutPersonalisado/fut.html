@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Único de Trámites (FUT)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="fut-contenido">
+    <header>
+      <img id="logo" src="img/logoInstituto.jpeg" alt="Logo">
+      <div class="titulo">
+        <h1>FORMULARIO ÚNICO DE TRÁMITES (F.U.T.)</h1>
+        <p>RM N° 0445-2012-ED – Distribución gratuita</p>
+      </div>
+    </header>
+
+    <form id="futForm">
+      <!-- I -->
+      <section>
+        <h2>I. RESUMEN DE SU PEDIDO</h2>
+        <textarea name="resumen" required></textarea>
+      </section>
+
+      <!-- II -->
+      <section>
+        <h2>II. DEPENDENCIA O AUTORIDAD A QUIEN SE DIRIGE</h2>
+        <input type="text" name="dependencia" required>
+      </section>
+
+      <!-- III -->
+      <section>
+        <h2>III. DATOS DEL SOLICITANTE</h2>
+        <table>
+          <tr>
+            <td>Apellido Paterno</td>
+            <td><input type="text" name="apellido_paterno" required></td>
+            <td>Apellido Materno</td>
+            <td><input type="text" name="apellido_materno" required></td>
+            <td>Nombres</td>
+            <td><input type="text" name="nombres" required></td>
+          </tr>
+          <tr>
+            <td>DNI</td>
+            <td><input type="text" name="dni" maxlength="8"></td>
+            <td>RUC</td>
+            <td><input type="text" name="ruc" maxlength="11"></td>
+            <td>C.E.</td>
+            <td><input type="text" name="ce"></td>
+          </tr>
+          <tr>
+            <td colspan="2">Correo electrónico</td>
+            <td colspan="4"><input type="email" name="correo" required></td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- IV -->
+      <section>
+        <h2>IV. DIRECCIÓN</h2>
+        <table>
+          <tr>
+            <td>Tipo de vía</td>
+            <td><input type="text" name="tipo_via"></td>
+            <td>Nombre de la vía</td>
+            <td><input type="text" name="nombre_via"></td>
+            <td>N° inmueble</td>
+            <td><input type="text" name="num_inmueble"></td>
+          </tr>
+          <tr>
+            <td>Provincia</td>
+            <td><input type="text" name="provincia"></td>
+            <td>Distrito</td>
+            <td><input type="text" name="distrito"></td>
+            <td>Referencia</td>
+            <td><input type="text" name="referencia"></td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- V -->
+      <section>
+        <h2>V. FUNDAMENTACIÓN DEL PEDIDO</h2>
+        <textarea name="fundamentacion" required></textarea>
+      </section>
+
+      <!-- VI -->
+      <section>
+        <h2>VI. DOCUMENTOS QUE SE ADJUNTAN</h2>
+        <input type="file" name="adjuntos" multiple>
+      </section>
+
+      <!-- Lugar y fecha -->
+      <section class="firma">
+        <table>
+          <tr>
+            <td>LUGAR</td>
+            <td><input type="text" name="lugar"></td>
+            <td>FECHA</td>
+            <td><input type="date" name="fecha"></td>
+          </tr>
+        </table>
+        <p>FIRMA DEL USUARIO: _____________________________</p>
+      </section>
+
+      <div class="acciones">
+        <button type="submit">Enviar Formulario</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Aquí aparecerá el resultado -->
+  <div id="resultado"></div>
+
+  <footer>
+    <p>Para consultas: www.minedu.gob.pe | Tel: 900-777-611</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

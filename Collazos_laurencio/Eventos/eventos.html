@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros - Con Calculadora de IMC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .header {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+            font-size: 1.1rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e1e1;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+
+        .input-field:focus {
+            border-color: #6a11cb;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+            outline: none;
+        }
+
+        .input-field::placeholder {
+            color: #aaa;
+        }
+
+        .icon {
+            position: absolute;
+            right: 20px;
+            top: 42px;
+            color: #6a11cb;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #5a0db5, #1c68e8);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .data-container {
+            margin-top: 30px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #6a11cb;
+        }
+
+        .data-container h2 {
+            color: #6a11cb;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-item:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .data-value {
+            color: #2575fc;
+            font-weight: 500;
+        }
+
+        .imc-result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .imc-bajo {
+            background-color: #ffeb3b;
+            color: #ff9800;
+            border-left: 5px solid #ff9800;
+        }
+
+        .imc-normal {
+            background-color: #4caf50;
+            color: white;
+            border-left: 5px solid #2e7d32;
+        }
+
+        .imc-sobrepeso {
+            background-color: #ff9800;
+            color: white;
+            border-left: 5px solid #f57c00;
+        }
+
+        .imc-obesidad {
+            background-color: #f44336;
+            color: white;
+            border-left: 5px solid #c62828;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            padding: 20px 0;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                max-width: 100%;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-user-plus"></i> Registro con IMC</h1>
+            <p>Ingresa tus datos y calcula tu Índice de Masa Corporal</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="input-group">
+                <label for="datoNombre"><i class="fas fa-user"></i> Nombre Completo</label>
+                <input id="datoNombre" type="text" class="input-field" placeholder="Ingrese su nombre">
+                <i class="fas fa-user icon"></i>
+            </div>
+            
+            <div class="input-group">
+                <label for="datoEdad"><i class="fas fa-birthday-cake"></i> Edad</label>
+                <input id="datoEdad" type="number" class="input-field" placeholder="Ingrese su edad">
+                <i class="fas fa-birthday-cake icon"></i>
+            </div>
+            
+            <div class="input-group">
+                <label for="datoEstatura"><i class="fas fa-ruler-vertical"></i> Estatura (cm)</label>
+                <input id="datoEstatura" type="number" class="input-field" placeholder="Ingrese su estatura en centímetros">
+                <i class="fas fa-ruler-vertical icon"></i>
+            </div>
+            
+            <div class="input-group">
+                <label for="datoPeso"><i class="fas fa-weight"></i> Peso (kg)</label>
+                <input id="datoPeso" type="number" class="input-field" placeholder="Ingrese su peso en kilogramos">
+                <i class="fas fa-weight icon"></i>
+            </div>
+            
+            <button class="btn" onclick="guardarDatos()">
+                <i class="fas fa-calculator"></i> Calcular IMC y Guardar
+            </button>
+        </div>
+        
+        <div class="data-container" id="Reg">
+            <h2><i class="fas fa-database"></i> Datos Registrados</h2>
+            <div class="empty-message" id="emptyMessage">
+                No hay datos registrados. Complete el formulario y haga clic en "Calcular IMC y Guardar".
+            </div>
+            <!-- Los datos se mostrarán aquí dinámicamente -->
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Frans OLiver Collazos laurencio &copy; 2025</p>
+    </div>
+
+    <script>
+        function calcularIMC(peso, estatura) {
+            // Convertir estatura de cm a metros
+            const estaturaMetros = estatura / 100;
+            // Calcular IMC: peso / (estatura^2)
+            return peso / (estaturaMetros * estaturaMetros);
+        }
+
+        function clasificarIMC(imc) {
+            if (imc < 18.5) {
+                return { categoria: "Bajo peso", clase: "imc-bajo" };
+            } else if (imc >= 18.5 && imc < 25) {
+                return { categoria: "Peso normal", clase: "imc-normal" };
+            } else if (imc >= 25 && imc < 30) {
+                return { categoria: "Sobrepeso", clase: "imc-sobrepeso" };
+            } else {
+                return { categoria: "Obesidad", clase: "imc-obesidad" };
+            }
+        }
+
+        function guardarDatos() {
+            // Obtener valores de los campos
+            const nombre = document.getElementById('datoNombre').value.trim();
+            const edad = document.getElementById('datoEdad').value.trim();
+            const estatura = parseFloat(document.getElementById('datoEstatura').value);
+            const peso = parseFloat(document.getElementById('datoPeso').value);
+            
+            // Validar que todos los campos estén completos
+            if (!nombre || !edad || !estatura || !peso) {
+                alert('Por favor, complete todos los campos antes de guardar.');
+                return;
+            }
+
+            // Validar que estatura y peso sean números positivos
+            if (estatura <= 0 || peso <= 0) {
+                alert('La estatura y el peso deben ser valores positivos.');
+                return;
+            }
+
+            // Calcular IMC
+            const imc = calcularIMC(peso, estatura);
+            const clasificacion = clasificarIMC(imc);
+            
+            // Obtener el contenedor de datos
+            const dataContainer = document.getElementById('Reg');
+            
+            // Ocultar mensaje de vacío
+            document.getElementById('emptyMessage').style.display = 'none';
+            
+            // Crear elementos para mostrar los datos
+            dataContainer.innerHTML = `
+                <h2><i class="fas fa-database"></i> Datos Registrados</h2>
+                <div class="data-item">
+                    <span class="data-label"><i class="fas fa-user"></i> Nombre:</span>
+                    <span class="data-value">${nombre}</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label"><i class="fas fa-birthday-cake"></i> Edad:</span>
+                    <span class="data-value">${edad} años</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label"><i class="fas fa-ruler-vertical"></i> Estatura:</span>
+                    <span class="data-value">${estatura} cm</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label"><i class="fas fa-weight"></i> Peso:</span>
+                    <span class="data-value">${peso} kg</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label"><i class="fas fa-calculator"></i> Índice de Masa Corporal:</span>
+                    <span class="data-value">${imc.toFixed(2)}</span>
+                </div>
+                <div class="imc-result ${clasificacion.clase}">
+                    <i class="fas fa-chart-line"></i> Clasificación: ${clasificacion.categoria}
+                </div>
+                <div class="data-item">
+                    <span class="data-label"><i class="fas fa-calendar"></i> Fecha de registro:</span>
+                    <span class="data-value">${new Date().toLocaleDateString()}</span>
+                </div>
+                <button class="btn" onclick="nuevoRegistro()" style="margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Nuevo Registro
+                </button>
+            `;
+            
+            // Limpiar los campos del formulario
+            document.getElementById('datoNombre').value = '';
+            document.getElementById('datoEdad').value = '';
+            document.getElementById('datoEstatura').value = '';
+            document.getElementById('datoPeso').value = '';
+        }
+        
+        function nuevoRegistro() {
+            // Restaurar el estado inicial
+            const dataContainer = document.getElementById('Reg');
+            dataContainer.innerHTML = `
+                <h2><i class="fas fa-database"></i> Datos Registrados</h2>
+                <div class="empty-message" id="emptyMessage">
+                    No hay datos registrados. Complete el formulario y haga clic en "Calcular IMC y Guardar".
+                </div>
+            `;
+            
+            // Enfocar el primer campo
+            document.getElementById('datoNombre').focus();
+        }
+    </script>
+</body>
+</html>

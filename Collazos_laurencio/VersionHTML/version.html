@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolución de HTML</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="stile.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <!-- Botones de navegación flotantes -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <div class="back-to-chart" id="backToChart">
+        <i class="fas fa-chart-bar"></i> Volver al Gráfico
+    </div>
+    
+    <header class="fade-in">
+        <h1 class="typewriter">EVOLUCIÓN DE HTML</h1>
+        <p class="subtitle">Un viaje visual a través de las versiones más significativas</p>
+        <p class="intro-text">Explora la fascinante evolución del lenguaje HTML desde sus inicios hasta la actualidad. Haz clic en cualquier versión del gráfico para navegar directamente a su información detallada.</p>
+    </header>
+    
+    <div class="evolution-chart fade-in" id="evolutionChart">
+        <div class="chart-item" style="color: #ff2e88;" data-version="html2">
+            <div class="chart-year">1995</div>
+            <div class="chart-name">HTML 2.0</div>
+            <i class="fas fa-file-code fa-3x" style="margin-top: 15px;"></i>
+            <div class="chart-desc">Primer estándar oficial del lenguaje web</div>
+        </div>
+        <div class="chart-item" style="color: #156fff;" data-version="html32">
+            <div class="chart-year">1997</div>
+            <div class="chart-name">HTML 3.2</div>
+            <i class="fas fa-table fa-3x" style="margin-top: 15px;"></i>
+            <div class="chart-desc">Introducción de tablas y applets de Java</div>
+        </div>
+        <div class="chart-item" style="color: #00ce1b;" data-version="html4">
+            <div class="chart-year">1999</div>
+            <div class="chart-name">HTML 4.01</div>
+            <i class="fas fa-css3-alt fa-3x" style="margin-top: 15px;"></i>
+            <div class="chart-desc">CSS, accesibilidad y separación de contenido</div>
+        </div>
+        <div class="chart-item" style="color: #dbd800;" data-version="xhtml">
+            <div class="chart-year">2000</div>
+            <div class="chart-name">XHTML 1.0</div>
+            <i class="fas fa-code fa-3x" style="margin-top: 15px;"></i>
+            <div class="chart-desc">HTML reformulado como aplicación XML</div>
+        </div>
+        <div class="chart-item" style="color: #9447ff;" data-version="html5">
+            <div class="chart-year">2014</div>
+            <div class="chart-name">HTML5</div>
+            <i class="fas fa-rocket fa-3x" style="margin-top: 15px;"></i>
+            <div class="chart-desc">Revolución moderna con semántica y APIs</div>
+        </div>
+    </div>
+    
+    <div class="nav-indicator fade-in">
+        <i class="fas fa-mouse-pointer"></i> Haz clic en cualquier versión para explorar sus detalles
+        <i class="fas fa-hand-point-down"></i>
+    </div>
+    
+    <div class="timeline">
+        <!-- HTML 2.0 -->
+        <div class="version left html2" id="html2">
+            <div class="content">
+                <h2><i class="fas fa-file-code"></i> HTML 2.0</h2>
+                <span class="year">1995 - PRIMERA ESTANDARIZACIÓN</span>
+                <div class="features">
+                    <h3><i class="fas fa-star"></i> Características Principales</h3>
+                    <ul>
+                        <li>Primera especificación formal de HTML por el IETF</li>
+                        <li>Soporte para formularios básicos con elementos como input y textarea</li>
+                        <li>Inclusión de tablas simples para organización de contenido</li>
+                        <li>Elementos de texto fundamentales: p, h1-h6, strong, em</li>
+                        <li>Listas ordenadas (ol) y no ordenadas (ul) para presentar información</li>
+                        <li>Enlaces e imágenes con los elementos a e img para navegación y multimedia</li>
+                        <li>Estructura básica de documento con head y body</li>
+                    </ul>
+                </div>
+                <div class="example">
+                    <div class="example-header">
+                        <div class="example-title">Ejemplo de código HTML 2.0</div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copiar Código</button>
+                    </div>
+                    <div class="code">
+                        <span class="tag">&lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN"&gt;</span><br>
+                        <span class="tag">&lt;html&gt;</span><br>
+                        <span class="tag">&lt;head&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Mi primera página HTML 2.0<span class="tag">&lt;/title&gt;</span><br>
+                        <span class="tag">&lt;/head&gt;</span><br>
+                        <span class="tag">&lt;body&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Bienvenido a mi sitio web<span class="tag">&lt;/h1&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Esta es una página HTML 2.0 que muestra las características básicas.<span class="tag">&lt;/p&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="value">"otra_pagina.html"</span><span class="tag">&gt;</span>Enlace de ejemplo<span class="tag">&lt;/a&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;img</span> <span class="attr">src=</span><span class="value">"imagen.gif"</span> <span class="attr">alt=</span><span class="value">"Descripción"</span><span class="tag">&gt;</span><br>
+                        <span class="tag">&lt;/body&gt;</span><br>
+                        <span class="tag">&lt;/html&gt;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HTML 3.2 -->
+        <div class="version right html32" id="html32">
+            <div class="content">
+                <h2><i class="fas fa-table"></i> HTML 3.2</h2>
+                <span class="year">1997 - ESTÁNDAR W3C</span>
+                <div class="features">
+                    <h3><i class="fas fa-star"></i> Características Principales</h3>
+                    <ul>
+                        <li>Primera recomendación de HTML por el W3C (World Wide Web Consortium)</li>
+                        <li>Tablas más complejas con atributos como colspan y rowspan para diseño avanzado</li>
+                        <li>Soporte para applets de Java para interactividad básica</li>
+                        <li>Mejoras en el flujo de texto alrededor de imágenes con el atributo align</li>
+                        <li>Atributos para alineación y dimensiones de elementos para mejor control visual</li>
+                        <li>Soporte inicial para scripts con el elemento script</li>
+                        <li>Elementos de fuente (font) para control tipográfico básico</li>
+                        <li>Mejoras en formularios con nuevos tipos de controles</li>
+                    </ul>
+                </div>
+                <div class="example">
+                    <div class="example-header">
+                        <div class="example-title">Ejemplo de código HTML 3.2</div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copiar Código</button>
+                    </div>
+                    <div class="code">
+                        <span class="tag">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"&gt;</span><br>
+                        <span class="tag">&lt;html&gt;</span><br>
+                        <span class="tag">&lt;head&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Página HTML 3.2 con tabla<span class="tag">&lt;/title&gt;</span><br>
+                        <span class="tag">&lt;/head&gt;</span><br>
+                        <span class="tag">&lt;body&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;table</span> <span class="attr">border=</span><span class="value">"1"</span> <span class="attr">cellpadding=</span><span class="value">"5"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;tr&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;td</span> <span class="attr">colspan=</span><span class="value">"2"</span><span class="tag">&gt;</span>Título de tabla<span class="tag">&lt;/td&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/tr&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;tr&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;td&gt;</span>Celda 1<span class="tag">&lt;/td&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;td&gt;</span>Celda 2<span class="tag">&lt;/td&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/tr&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;/table&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;applet</span> <span class="attr">code=</span><span class="value">"MiApplet.class"</span> <span class="attr">width=</span><span class="value">"300"</span> <span class="attr">height=</span><span class="value">"200"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Tu navegador no soporta applets de Java.<br>
+                        &nbsp;&nbsp;<span class="tag">&lt;/applet&gt;</span><br>
+                        <span class="tag">&lt;/body&gt;</span><br>
+                        <span class="tag">&lt;/html&gt;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HTML 4.01 -->
+        <div class="version left html4" id="html4">
+            <div class="content">
+                <h2><i class="fas fa-css3-alt"></i> HTML 4.01</h2>
+                <span class="year">1999 - SEPARACIÓN DE PRESENTACIÓN</span>
+                <div class="features">
+                    <h3><i class="fas fa-star"></i> Características Principales</h3>
+                    <ul>
+                        <li>Introducción de hojas de estilo en cascada (CSS) para separar contenido y presentación</li>
+                        <li>Marcado mejorado para accesibilidad con atributos como alt, title y accesskey</li>
+                        <li>Mejoras significativas en formularios con nuevos controles y validación</li>
+                        <li>Separación clara entre estructura y presentación para un desarrollo más limpio</li>
+                        <li>Soporte para frames (iframe) para contenido embebido</li>
+                        <li>Scripting mejorado con soporte para DOM (Document Object Model)</li>
+                        <li>Tres variantes: Strict (sin elementos de presentación), Transitional (con elementos obsoletos) y Frameset (para frames)</li>
+                        <li>Mejor internacionalización con soporte para diferentes conjuntos de caracteres</li>
+                    </ul>
+                </div>
+                <div class="example">
+                    <div class="example-header">
+                        <div class="example-title">Ejemplo de código HTML 4.01</div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copiar Código</button>
+                    </div>
+                    <div class="code">
+                        <span class="tag">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;</span><br>
+                        <span class="tag">&lt;html&gt;</span><br>
+                        <span class="tag">&lt;head&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Página HTML 4.01 con CSS<span class="tag">&lt;/title&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;meta</span> <span class="attr">http-equiv=</span><span class="value">"Content-Type"</span> <span class="attr">content=</span><span class="value">"text/html; charset=utf-8"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">type=</span><span class="value">"text/css"</span> <span class="attr">href=</span><span class="value">"estilos.css"</span><span class="tag">&gt;</span><br>
+                        <span class="tag">&lt;/head&gt;</span><br>
+                        <span class="tag">&lt;body&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">id=</span><span class="value">"contenedor"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Título principal<span class="tag">&lt;/h1&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"destacado"</span><span class="tag">&gt;</span>Este párrafo tiene una clase CSS aplicada.<span class="tag">&lt;/p&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;iframe</span> <span class="attr">src=</span><span class="value">"marco.html"</span> <span class="attr">width=</span><span class="value">"300"</span> <span class="attr">height=</span><span class="value">"200"</span><span class="tag">&gt;</span><span class="tag">&lt;/iframe&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+                        <span class="tag">&lt;/body&gt;</span><br>
+                        <span class="tag">&lt;/html&gt;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- XHTML 1.0 -->
+        <div class="version right xhtml" id="xhtml">
+            <div class="content">
+                <h2><i class="fas fa-code"></i> XHTML 1.0</h2>
+                <span class="year">2000 - HTML COMO XML</span>
+                <div class="features">
+                    <h3><i class="fas fa-star"></i> Características Principales</h3>
+                    <ul>
+                        <li>Reformulación de HTML 4 como aplicación XML para mayor consistencia</li>
+                        <li>Sintaxis más estricta y bien formada siguiendo las reglas de XML</li>
+                        <li>Elementos deben estar correctamente anidados y cerrados explícitamente</li>
+                        <li>Atributos deben ir entre comillas (simples o dobles) obligatoriamente</li>
+                        <li>Elementos vacíos deben cerrarse con /&gt; (ej: &lt;br /&gt;)</li>
+                        <li>Nombres de elementos y atributos en minúsculas obligatoriamente</li>
+                        <li>Mejor compatibilidad con otros lenguajes XML y herramientas de procesamiento</li>
+                        <li>Documentos bien formados que pueden ser analizados por parsers XML</li>
+                    </ul>
+                </div>
+                <div class="example">
+                    <div class="example-header">
+                        <div class="example-title">Ejemplo de código XHTML 1.0</div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copiar Código</button>
+                    </div>
+                    <div class="code">
+                        <span class="tag">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span><br>
+                        <span class="tag">&lt;html</span> <span class="attr">xmlns=</span><span class="value">"http://www.w3.org/1999/xhtml"</span> <span class="attr">xml:lang=</span><span class="value">"es"</span> <span class="attr">lang=</span><span class="value">"es"</span><span class="tag">&gt;</span><br>
+                        <span class="tag">&lt;head&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Página XHTML 1.0 Estricta<span class="tag">&lt;/title&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;meta</span> <span class="attr">http-equiv=</span><span class="value">"Content-Type"</span> <span class="attr">content=</span><span class="value">"text/html; charset=utf-8"</span> <span class="tag">/&gt;</span><br>
+                        <span class="tag">&lt;/head&gt;</span><br>
+                        <span class="tag">&lt;body&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Ejemplo XHTML<span class="tag">&lt;/h1&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Este es un párrafo correctamente formado.<span class="tag">&lt;/p&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;br</span> <span class="tag">/&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;img</span> <span class="attr">src=</span><span class="value">"imagen.jpg"</span> <span class="attr">alt=</span><span class="value">"Descripción de la imagen"</span> <span class="tag">/&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">id=</span><span class="value">"contenido"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Contenido dentro de un div.<span class="tag">&lt;/p&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+                        <span class="tag">&lt;/body&gt;</span><br>
+                        <span class="tag">&lt;/html&gt;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HTML5 -->
+        <div class="version left html5" id="html5">
+            <div class="content">
+                <h2><i class="fas fa-rocket"></i> HTML5</h2>
+                <span class="year">2014 - LA REVOLUCIÓN MODERNA</span>
+                <div class="features">
+                    <h3><i class="fas fa-star"></i> Características Principales</h3>
+                    <ul>
+                        <li>Nuevos elementos semánticos: header, footer, section, article, nav, aside, main</li>
+                        <li>Soporte nativo para audio y video sin necesidad de plugins externos</li>
+                        <li>Canvas para gráficos vectoriales, animaciones y juegos en 2D</li>
+                        <li>APIs para aplicaciones web: geolocalización, almacenamiento local, drag and drop</li>
+                        <li>Formularios mejorados con nuevos tipos de input (email, url, date, color, etc.)</li>
+                        <li>Mejor soporte para dispositivos móviles con viewport y elementos responsivos</li>
+                        <li>Sintaxis más flexible y forgiving que XHTML pero manteniendo buenas prácticas</li>
+                        <li>Web Workers para ejecución de scripts en segundo plano</li>
+                        <li>WebSockets para comunicación bidireccional en tiempo real</li>
+                    </ul>
+                </div>
+                <div class="example">
+                    <div class="example-header">
+                        <div class="example-title">Ejemplo de código HTML5</div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copiar Código</button>
+                    </div>
+                    <div class="code">
+                        <span class="tag">&lt;!DOCTYPE html&gt;</span><br>
+                        <span class="tag">&lt;html</span> <span class="attr">lang=</span><span class="value">"es"</span><span class="tag">&gt;</span><br>
+                        <span class="tag">&lt;head&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;meta</span> <span class="attr">charset=</span><span class="value">"UTF-8"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;meta</span> <span class="attr">name=</span><span class="value">"viewport"</span> <span class="attr">content=</span><span class="value">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Página HTML5 Semántica<span class="tag">&lt;/title&gt;</span><br>
+                        <span class="tag">&lt;/head&gt;</span><br>
+                        <span class="tag">&lt;body&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;header&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Mi sitio web moderno<span class="tag">&lt;/h1&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;nav&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="value">"#"</span><span class="tag">&gt;</span>Inicio<span class="tag">&lt;/a&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="value">"#"</span><span class="tag">&gt;</span>Acerca de<span class="tag">&lt;/a&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/nav&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;/header&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;main&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;article&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Artículo principal<span class="tag">&lt;/h2&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Contenido del artículo...<span class="tag">&lt;/p&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;video</span> <span class="attr">controls</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;source</span> <span class="attr">src=</span><span class="value">"video.mp4"</span> <span class="attr">type=</span><span class="value">"video/mp4"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/video&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/article&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;/main&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;footer&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Derechos reservados &copy; 2023<span class="tag">&lt;/p&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;/footer&gt;</span><br>
+                        <span class="tag">&lt;/body&gt;</span><br>
+                        <span class="tag">&lt;/html&gt;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="fade-in">
+        <p style="font-size: 1.3rem; margin-bottom: 15px; font-weight: 700;">Diseñado para mostrar la evolución de HTML</p>
+        <p style="opacity: 0.9; font-size: 1.1rem; font-weight: 600;">© 2025 - Frans Oliver - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

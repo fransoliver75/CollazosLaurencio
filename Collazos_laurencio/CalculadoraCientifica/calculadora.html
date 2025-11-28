@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Científica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator" id="calculator">
+        <div class="display">
+            <div class="previous-operand" id="previous-operand"></div>
+            <div class="current-operand" id="current-operand">0</div>
+        </div>
+        
+        <div class="trig-panel">
+            <button class="function-btn" data-function="sin">sin</button>
+            <button class="function-btn" data-function="cos">cos</button>
+            <button class="function-btn" data-function="tan">tan</button>
+            <button class="function-btn" data-function="log">log</button>
+            <button class="function-btn" data-function="ln">ln</button>
+            <button class="function-btn" data-function="sqrt">√</button>
+            <button class="function-btn" data-function="square">x²</button>
+            <button class="function-btn" data-function="power">x^y</button>
+            <button class="function-btn" data-function="factorial">x!</button>
+            <button class="function-btn" data-function="pi">π</button>
+            <button class="function-btn" data-function="e">e</button>
+        </div>
+        
+        <div class="panel">
+            <button class="memory-btn" data-function="mc">MC</button>
+            <button class="memory-btn" data-function="mr">MR</button>
+            <button class="memory-btn" data-function="m-plus">M+</button>
+            <button class="memory-btn" data-function="m-minus">M-</button>
+            
+            <button class="clear-btn" data-function="clear">C</button>
+            <button class="function-btn" data-function="backspace">⌫</button>
+            <button class="function-btn" data-function="percent">%</button>
+            <button class="operator-btn" data-operator="÷">÷</button>
+            
+            <button class="number-btn" data-number="7">7</button>
+            <button class="number-btn" data-number="8">8</button>
+            <button class="number-btn" data-number="9">9</button>
+            <button class="operator-btn" data-operator="×">×</button>
+            
+            <button class="number-btn" data-number="4">4</button>
+            <button class="number-btn" data-number="5">5</button>
+            <button class="number-btn" data-number="6">6</button>
+            <button class="operator-btn" data-operator="-">−</button>
+            
+            <button class="number-btn" data-number="1">1</button>
+            <button class="number-btn" data-number="2">2</button>
+            <button class="number-btn" data-number="3">3</button>
+            <button class="operator-btn" data-operator="+">+</button>
+            
+            <button class="toggle-trig function-btn" data-function="toggle-trig">SCI</button>
+            <button class="number-btn" data-number="0">0</button>
+            <button class="function-btn" data-function="decimal">.</button>
+            <button class="equals-btn" data-equals>=</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

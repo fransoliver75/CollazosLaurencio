@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Compatibilidad y Consistencia en HTML</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Estilos generales mejorados */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --color-primario: #ff6b6b;
+            --color-secundario: #4ecdc4;
+            --color-terciario: #45b7d1;
+            --color-cuaternario: #ffbe0b;
+            --color-fondo: #0f0c29;
+            --color-texto: #ffffff;
+            --color-sombra: rgba(0, 0, 0, 0.5);
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--color-fondo), #302b63, #24243e);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            height: 100vh;
+            overflow: hidden;
+            color: var(--color-texto);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .presentacion {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+        
+        .diapositiva {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(50px) rotateX(10deg);
+            transition: opacity 1s ease, transform 1s ease;
+            text-align: center;
+        }
+        
+        .diapositiva.activa {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 0 var(--color-sombra), 6px 6px 0 rgba(0,0,0,0.2);
+            animation: tituloEntrada 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: linear-gradient(45deg, var(--color-primario), var(--color-cuaternario));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 0 var(--color-sombra);
+            background: linear-gradient(45deg, var(--color-secundario), var(--color-terciario));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 0.5rem 1.5rem;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--color-secundario);
+            font-weight: 600;
+        }
+        
+        p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px var(--color-sombra);
+            padding: 1rem;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            border-left: 5px solid var(--color-primario);
+            font-weight: 500;
+        }
+        
+        ul {
+            text-align: left;
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 1.5rem 0;
+            list-style: none;
+        }
+        
+        li {
+            margin-bottom: 0.8rem;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-secundario);
+            transition: transform 0.3s ease, background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+        
+        li:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        li::before {
+            content: '▶';
+            margin-right: 10px;
+            color: var(--color-primario);
+            font-size: 0.8rem;
+        }
+        
+        .codigo {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.2rem;
+            border-radius: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            margin: 1.5rem 0;
+            max-width: 900px;
+            text-align: left;
+            border-left: 5px solid var(--color-primario);
+            box-shadow: 0 10px 20px var(--color-sombra);
+            position: relative;
+            overflow: hidden;
+            line-height: 1.5;
+        }
+        
+        .codigo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--color-primario), var(--color-cuaternario));
+        }
+        
+        .contador {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 5px 15px var(--color-sombra);
+            font-weight: 600;
+        }
+        
+        /* Animaciones específicas mejoradas */
+        @keyframes tituloEntrada {
+            0% { 
+                transform: scale(0.3) rotate(-10deg); 
+                opacity: 0; 
+                filter: blur(10px);
+            }
+            70% { 
+                transform: scale(1.1) rotate(2deg); 
+            }
+            100% { 
+                transform: scale(1) rotate(0); 
+                opacity: 1; 
+                filter: blur(0);
+            }
+        }
+        
+        .animacion-entrada {
+            animation: entradaElemento 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes entradaElemento {
+            0% { 
+                transform: translateX(-100px) scale(0.8); 
+                opacity: 0; 
+            }
+            100% { 
+                transform: translateX(0) scale(1); 
+                opacity: 1; 
+            }
+        }
+        
+        @keyframes brillo {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        .efecto-acento {
+            color: var(--color-cuaternario);
+            font-weight: bold;
+            text-shadow: 2px 2px 0 var(--color-sombra);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .efecto-acento::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-cuaternario), transparent);
+            animation: subrayado 2s infinite;
+        }
+        
+        @keyframes subrayado {
+            0% { transform: scaleX(0); opacity: 0; }
+            50% { transform: scaleX(1); opacity: 1; }
+            100% { transform: scaleX(0); opacity: 0; }
+        }
+        
+        .icono {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: rotarIcono 5s infinite linear;
+            filter: drop-shadow(0 5px 5px var(--color-sombra));
+        }
+        
+        @keyframes rotarIcono {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        .tarjeta {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.2rem;
+            margin: 0.8rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 30px var(--color-sombra);
+            transition: transform 0.3s ease;
+            max-width: 300px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .tarjeta:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contenedor-tarjetas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .integrantes {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .integrante {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--color-primario);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .integrante:hover {
+            transform: translateX(10px);
+        }
+        
+        .ventajas-desventajas {
+            display: flex;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 1.5rem 0;
+        }
+        
+        .columna {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .ventaja {
+            background: rgba(78, 205, 196, 0.2);
+            border-left: 4px solid var(--color-secundario);
+        }
+        
+        .desventaja {
+            background: rgba(255, 107, 107, 0.2);
+            border-left: 4px solid var(--color-primario);
+        }
+        
+        .indicador-teclas {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 5px 15px var(--color-sombra);
+            font-size: 0.9rem;
+            display: flex;
+            gap: 0.8rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .indicador-teclas:hover {
+            opacity: 1;
+        }
+        
+        .tecla {
+            background: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        
+        /* Efectos de partículas */
+        .particulas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particula {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            animation: flotar 10s infinite linear;
+        }
+        
+        @keyframes flotar {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Estilos para dispositivos móviles */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.4rem; }
+            p, li { font-size: 1.1rem; }
+            .codigo { font-size: 1rem; padding: 1rem; }
+            .contenedor-tarjetas { flex-direction: column; align-items: center; }
+            .tarjeta { max-width: 100%; }
+            .indicador-teclas { font-size: 0.8rem; padding: 0.5rem 1rem; }
+            .ventajas-desventajas { flex-direction: column; gap: 1rem; }
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+            p, li { font-size: 1rem; }
+            .diapositiva { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particulas" id="particulas"></div>
+    
+    <div class="presentacion">
+        <!-- Diapositiva 1: Presentación -->
+        <div class="diapositiva activa" id="diapo1">
+            <div class="icono"><i class="fas fa-users"></i></div>
+            <h1>Compatibilidad y Consistencia en HTML</h1>
+            <p>Presentado por:</p>
+            <div class="integrantes">
+                <div class="integrante animacion-entrada">1. Collazos Laurencio Frans Oliver</div>
+                <div class="integrante animacion-entrada">2. Cano Justo Talia</div>
+                <div class="integrante animacion-entrada">3. Jhonatan Cervantes Rumaldo</div>
+            </div>
+        </div>
+        
+        <!-- Diapositiva 2: Definición -->
+        <div class="diapositiva" id="diapo2">
+            <h2>¿Qué es la Compatibilidad Web?</h2>
+            <p class="animacion-entrada">Capacidad del código para funcionar correctamente en diferentes navegadores y dispositivos.</p>
+            <div class="icono"><i class="fas fa-sync-alt"></i></div>
+            <ul>
+                <li>Mismo código, múltiples plataformas</li>
+                <li>Experiencia uniforme para usuarios</li>
+                <li>Reducción de errores</li>
+            </ul>
+        </div>
+        
+        <!-- Diapositiva 3: Importancia -->
+        <div class="diapositiva" id="diapo3">
+            <h2>¿Por qué es importante?</h2>
+            <div class="icono"><i class="fas fa-chart-line"></i></div>
+            <div class="contenedor-tarjetas">
+                <div class="tarjeta animacion-entrada">
+                    <h3><i class="fas fa-users"></i> UX</h3>
+                    <p>Mejora la experiencia del usuario</p>
+                </div>
+                
+                <div class="tarjeta animacion-entrada">
+                    <h3><i class="fas fa-bullseye"></i> Alcance</h3>
+                    <p>Amplía tu audiencia global</p>
+                </div>
+                
+                <div class="tarjeta animacion-entrada">
+                    <h3><i class="fas fa-wrench"></i> Mantenimiento</h3>
+                    <p>Reduce costos de desarrollo</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Diapositiva 4: Ventajas y Desventajas -->
+        <div class="diapositiva" id="diapo4">
+            <h2>Ventajas y Desventajas</h2>
+            <div class="icono"><i class="fas fa-balance-scale"></i></div>
+            
+            <div class="ventajas-desventajas">
+                <div class="columna">
+                    <h3 style="color: var(--color-secundario);">Ventajas</h3>
+                    <ul>
+                        <li class="ventaja">Mejor experiencia de usuario</li>
+                        <li class="ventaja">Mayor alcance de audiencia</li>
+                        <li class="ventaja">Reducción de costos</li>
+                        <li class="ventaja">Mejor SEO</li>
+                        <li class="ventaja">Futuro-proof</li>
+                    </ul>
+                </div>
+                
+                <div class="columna">
+                    <h3 style="color: var(--color-primario);">Desventajas</h3>
+                    <ul>
+                        <li class="desventaja">Tiempo de desarrollo mayor</li>
+                        <li class="desventaja">Testing más complejo</li>
+                        <li class="desventaja">Limitaciones en diseño</li>
+                        <li class="desventaja">Compatibilidad con legacy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Diapositiva 5: Elementos compatibles -->
+        <div class="diapositiva" id="diapo5">
+            <h2>Elementos Compatibles</h2>
+            <div class="icono"><i class="fas fa-check-circle"></i></div>
+            <p>Elementos con soporte universal:</p>
+            
+            <div class="contenedor-tarjetas">
+                <div class="tarjeta">
+                    <h3>Estructura</h3>
+                    <p>&lt;div&gt;, &lt;p&gt;, &lt;h1&gt;-&lt;h6&gt;</p>
+                </div>
+                
+                <div class="tarjeta">
+                    <h3>Multimedia</h3>
+                    <p>&lt;img&gt;, &lt;a&gt;, &lt;ul&gt;, &lt;li&gt;</p>
+                </div>
+                
+                <div class="tarjeta">
+                    <h3>Formularios</h3>
+                    <p>&lt;form&gt;, &lt;input&gt;, &lt;button&gt;</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Diapositiva 6: HTML5 Moderno -->
+        <div class="diapositiva" id="diapo6">
+            <h2>HTML5 Moderno</h2>
+            <div class="icono"><i class="fas fa-rocket"></i></div>
+            <p>Elementos semánticos con buena compatibilidad:</p>
+            
+            <div class="codigo">
+                &lt;header&gt;, &lt;footer&gt;, &lt;nav&gt;, &lt;section&gt;<br>
+                &lt;article&gt;, &lt;aside&gt;, &lt;main&gt;, &lt;figure&gt;
+            </div>
+            
+            <p><span class="efecto-acento">Nota:</span> Usar polyfills para navegadores antiguos.</p>
+        </div>
+        
+        <!-- Diapositiva 7: Mejores prácticas -->
+        <div class="diapositiva" id="diapo7">
+            <h2>Mejores Prácticas</h2>
+            <div class="icono"><i class="fas fa-tools"></i></div>
+            
+            <ul>
+                <li>Usar DOCTYPE correcto</li>
+                <li>Validar código HTML</li>
+                <li>Probar en múltiples navegadores</li>
+                <li>Implementar diseño responsivo</li>
+                <li>Usar polyfills cuando sea necesario</li>
+            </ul>
+        </div>
+        
+        <!-- Diapositiva 8: Herramientas -->
+        <div class="diapositiva" id="diapo8">
+            <h2>Herramientas</h2>
+            <div class="icono"><i class="fas fa-toolbox"></i></div>
+            
+            <div class="contenedor-tarjetas">
+                <div class="tarjeta">
+                    <h3><i class="fas fa-check-double"></i> Validación</h3>
+                    <p>W3C Validator</p>
+                </div>
+                
+                <div class="tarjeta">
+                    <h3><i class="fas fa-question-circle"></i> Compatibilidad</h3>
+                    <p>Can I Use</p>
+                </div>
+                
+                <div class="tarjeta">
+                    <h3><i class="fas fa-desktop"></i> Testing</h3>
+                    <p>BrowserStack</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Diapositiva 9: Conclusión -->
+        <div class="diapositiva" id="diapo9">
+            <h2>Conclusión</h2>
+            <div class="icono"><i class="fas fa-flag-checkered"></i></div>
+            <p>La compatibilidad web es esencial para el éxito online.</p>
+            
+            <div class="contenedor-tarjetas">
+                <div class="tarjeta">
+                    <h3><i class="fas fa-shield-alt"></i> Resiliencia</h3>
+                    <p>Funciona en futuros navegadores</p>
+                </div>
+                
+                <div class="tarjeta">
+                    <h3><i class="fas fa-expand-arrows-alt"></i> Accesibilidad</h3>
+                    <p>Llega a más usuarios</p>
+                </div>
+                
+                <div class="tarjeta">
+                    <h3><i class="fas fa-gem"></i> Calidad</h3>
+                    <p>Demuestra profesionalismo</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 2rem;">Invertir en compatibilidad es invertir en el <span class="efecto-acento">futuro de tu sitio web</span>.</p>
+        </div>
+        
+        <!-- Contador de diapositivas -->
+        <div class="contador" id="contador">1 / 9</div>
+        
+        <!-- Indicador de teclas -->
+        <div class="indicador-teclas">
+            <span>Navegar:</span>
+            <span class="tecla">←</span> <span>Anterior</span>
+            <span class="tecla">→</span> <span>Siguiente</span>
+        </div>
+    </div>
+
+    <!-- Efectos de sonido -->
+    <audio id="sonidoCambio" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/286/286-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sonidoEntrada" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/257/257-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Variables para controlar la presentación
+        let diapositivaActual = 0;
+        const totalDiapositivas = 9;
+        const sonidoCambio = document.getElementById('sonidoCambio');
+        const sonidoEntrada = document.getElementById('sonidoEntrada');
+        const contador = document.getElementById('contador');
+        
+        // Crear partículas de fondo
+        function crearParticulas() {
+            const contenedor = document.getElementById('particulas');
+            for (let i = 0; i < 40; i++) {
+                const particula = document.createElement('div');
+                particula.classList.add('particula');
+                particula.style.left = `${Math.random() * 100}%`;
+                particula.style.animationDelay = `${Math.random() * 10}s`;
+                particula.style.animationDuration = `${10 + Math.random() * 10}s`;
+                contenedor.appendChild(particula);
+            }
+        }
+        
+        // Función para cambiar de diapositiva
+        function cambiarDiapositiva(direccion) {
+            // Ocultar diapositiva actual
+            document.getElementById(`diapo${diapositivaActual + 1}`).classList.remove('activa');
+            
+            // Calcular nueva diapositiva
+            diapositivaActual += direccion;
+            
+            // Asegurarse de que esté dentro de los límites
+            if (diapositivaActual < 0) diapositivaActual = 0;
+            if (diapositivaActual >= totalDiapositivas) diapositivaActual = totalDiapositivas - 1;
+            
+            // Mostrar nueva diapositiva
+            document.getElementById(`diapo${diapositivaActual + 1}`).classList.add('activa');
+            
+            // Actualizar contador
+            contador.textContent = `${diapositivaActual + 1} / ${totalDiapositivas}`;
+            
+            // Reproducir sonido
+            sonidoCambio.play();
+            
+            // Añadir animaciones a los elementos de la nueva diapositiva
+            const elementos = document.getElementById(`diapo${diapositivaActual + 1}`).querySelectorAll('p, ul, .codigo, .icono, .tarjeta, li, .integrante');
+            elementos.forEach((elemento, index) => {
+                elemento.classList.remove('animacion-entrada');
+                setTimeout(() => {
+                    elemento.classList.add('animacion-entrada');
+                    if (index === 0) sonidoEntrada.play();
+                }, 200 * index);
+            });
+        }
+        
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') cambiarDiapositiva(-1);
+            if (e.key === 'ArrowRight') cambiarDiapositiva(1);
+            if (e.key === 'Home') {
+                document.getElementById(`diapo${diapositivaActual + 1}`).classList.remove('activa');
+                diapositivaActual = 0;
+                document.getElementById(`diapo${diapositivaActual + 1}`).classList.add('activa');
+                contador.textContent = `${diapositivaActual + 1} / ${totalDiapositivas}`;
+            }
+            if (e.key === 'End') {
+                document.getElementById(`diapo${diapositivaActual + 1}`).classList.remove('activa');
+                diapositivaActual = totalDiapositivas - 1;
+                document.getElementById(`diapo${diapositivaActual + 1}`).classList.add('activa');
+                contador.textContent = `${diapositivaActual + 1} / ${totalDiapositivas}`;
+            }
+        });
+        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            crearParticulas();
+            contador.textContent = `${diapositivaActual + 1} / ${totalDiapositivas}`;
+            
+            // Añadir animaciones iniciales
+            setTimeout(() => {
+                const elementos = document.getElementById(`diapo${diapositivaActual + 1}`).querySelectorAll('p, ul, .codigo, .icono, .tarjeta, li, .integrante');
+                elementos.forEach((elemento, index) => {
+                    setTimeout(() => {
+                        elemento.classList.add('animacion-entrada');
+                    }, 400 * index);
+                });
+            }, 800);
+        });
+    </script>
+</body>
+</html>

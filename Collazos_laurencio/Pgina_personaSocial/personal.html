@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Social - Nivel Primaria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">🌎</div>
+                <div>
+                    <h1>Personal Social</h1>
+                    <div class="subtitle">¡Aprendiendo sobre nuestro mundo!</div>
+                </div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#inicio" class="nav-link active" data-target="inicio"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="#contenidos" class="nav-link" data-target="contenidos"><i class="fas fa-book"></i> Contenidos</a></li>
+                    <li><a href="#actividades" class="nav-link" data-target="actividades"><i class="fas fa-gamepad"></i> Actividades</a></li>
+                    <li><a href="#recursos" class="nav-link" data-target="recursos"><i class="fas fa-download"></i> Recursos</a></li>
+                    <li><a href="#galeria" class="nav-link" data-target="galeria"><i class="fas fa-images"></i> Galería</a></li>
+                    <li><a href="#juegos" class="nav-link" data-target="juegos"><i class="fas fa-puzzle-piece"></i> Juegos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <!-- Sección de bienvenida -->
+        <section id="inicio" class="active">
+            <h2><i class="fas fa-star"></i> ¡Bienvenidos!</h2>
+            <p>En este curso exploraremos juntos nuestro entorno, nuestra historia y nuestra sociedad. Aprenderemos sobre nuestros derechos, responsabilidades y cómo convivir en armonía con los demás y con nuestro planeta.</p>
+            
+            <!-- Carrusel -->
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="carousel-slide">
+                        <img src="https://st.depositphotos.com/1037987/2444/i/450/depositphotos_24442087-stock-photo-male-student-working-at-desk.jpg" alt="Niño aprendiendo">
+                        <div class="slide-content">
+                            <h3>¡Aprendamos juntos!</h3>
+                            <p>Descubre el mundo que te rodea de forma divertida</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://cdn.tourradar.com/s3/serp/1500x800/215920_qnelkEda.jpg" alt="Machu Picchu">
+                        <div class="slide-content">
+                            <h3>Nuestra Historia</h3>
+                            <p>Conoce los lugares históricos de nuestro país</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://depaseoperu.com/wp-content/uploads/2017/01/Cultura-Del-Peru.jpg" alt="Cultura">
+                        <div class="slide-content">
+                            <h3>Nuestra Cultura</h3>
+                            <p>Valora la diversidad cultural de nuestro país</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-indicators">
+                    <div class="indicator active"></div>
+                    <div class="indicator"></div>
+                    <div class="indicator"></div>
+                </div>
+            </div>
+            
+            <div class="cards-container">
+                <div class="card floating">
+                    <h3><span class="card-icon">👥</span> Convivencia</h3>
+                    <p>Aprenderemos a relacionarnos respetuosamente con los demás, valorando la diversidad y resolviendo conflictos de manera pacífica.</p>
+                    <button class="card-btn" onclick="showContentModal('convivencia')">Saber más</button>
+                </div>
+                
+                <div class="card floating" style="animation-delay: 0.5s;">
+                    <h3><span class="card-icon">🗺️</span> Nuestro Entorno</h3>
+                    <p>Conoceremos nuestro país, sus regiones, recursos naturales y cómo cuidar nuestro medio ambiente.</p>
+                    <button class="card-btn" onclick="showContentModal('entorno')">Saber más</button>
+                </div>
+                
+                <div class="card floating" style="animation-delay: 1s;">
+                    <h3><span class="card-icon">📜</span> Nuestra Historia</h3>
+                    <p>Exploraremos los principales acontecimientos históricos que han dado forma a nuestra sociedad actual.</p>
+                    <button class="card-btn" onclick="showContentModal('historia')">Saber más</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de contenidos -->
+        <section id="contenidos">
+            <h2><i class="fas fa-book-open"></i> Contenidos del Curso</h2>
+            
+            <div class="cards-container">
+                <div class="card">
+                    <h3><span class="card-icon">🧠</span> Identidad Personal</h3>
+                    <p>Reconocimiento de nuestras características personales, emociones y valores que nos hacen únicos.</p>
+                    <button class="card-btn" onclick="showContentModal('identidad')">Explorar</button>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="card-icon">👨‍👩‍👧‍👦</span> La Familia</h3>
+                    <p>Importancia de la familia, roles familiares y valores que se practican en el hogar.</p>
+                    <button class="card-btn" onclick="showContentModal('familia')">Explorar</button>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="card-icon">🏫</span> La Escuela</h3>
+                    <p>Normas de convivencia escolar, derechos y responsabilidades de los estudiantes.</p>
+                    <button class="card-btn" onclick="showContentModal('escuela')">Explorar</button>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="card-icon">🏙️</span> Nuestra Comunidad</h3>
+                    <p>Organización de la comunidad, servicios públicos y participación ciudadana.</p>
+                    <button class="card-btn" onclick="showContentModal('comunidad')">Explorar</button>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="card-icon">🌎</span> Nuestro País</h3>
+                    <p>División política, símbolos patrios, diversidad cultural y geográfica.</p>
+                    <button class="card-btn" onclick="showContentModal('pais')">Explorar</button>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="card-icon">🌳</span> Cuidado del Medio Ambiente</h3>
+                    <p>Importancia de proteger nuestros recursos naturales y prácticas ecológicas.</p>
+                    <button class="card-btn" onclick="showContentModal('medioambiente')">Explorar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de actividades -->
+        <section id="actividades">
+            <h2><i class="fas fa-tasks"></i> Actividades Interactivas</h2>
+            
+            <div class="activities-container">
+                <div class="activity">
+                    <h3>Quiz: Nuestros Símbolos Patrios</h3>
+                    <div class="quiz-container">
+                        <div class="question" id="question1">1. ¿Cuál es el animal que representa a nuestro país?</div>
+                        <div class="options">
+                            <div class="option" onclick="checkAnswer(this, 'correct')"><i class="fas fa-paw"></i> La vicuña</div>
+                            <div class="option" onclick="checkAnswer(this, 'incorrect')"><i class="fas fa-dove"></i> El cóndor</div>
+                            <div class="option" onclick="checkAnswer(this, 'incorrect')"><i class="fas fa-cat"></i> El puma</div>
+                            <div class="option" onclick="checkAnswer(this, 'incorrect')"><i class="fas fa-horse"></i> La llama</div>
+                        </div>
+                        <div class="result" id="result1"></div>
+                    </div>
+                    
+                    <div class="quiz-container">
+                        <div class="question" id="question2">2. ¿Cuáles son los colores de nuestra bandera?</div>
+                        <div class="options">
+                            <div class="option" onclick="checkAnswer2(this, 'incorrect')"><i class="fas fa-palette"></i> Azul, blanco y amarillo</div>
+                            <div class="option" onclick="checkAnswer2(this, 'correct')"><i class="fas fa-palette"></i> Rojo, blanco y rojo</div>
+                            <div class="option" onclick="checkAnswer2(this, 'incorrect')"><i class="fas fa-palette"></i> Verde, blanco y rojo</div>
+                            <div class="option" onclick="checkAnswer2(this, 'incorrect')"><i class="fas fa-palette"></i> Azul, amarillo y rojo</div>
+                        </div>
+                        <div class="result" id="result2"></div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <h3>Juego: Arma tu comunidad ideal</h3>
+                    <p>Haz clic en los elementos para agregarlos a tu comunidad:</p>
+                    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                        <button class="community-item" onclick="addToCommunity('escuela')">🏫 Escuela</button>
+                        <button class="community-item" onclick="addToCommunity('parque')">🌳 Parque</button>
+                        <button class="community-item" onclick="addToCommunity('hospital')">🏥 Hospital</button>
+                        <button class="community-item" onclick="addToCommunity('biblioteca')">📚 Biblioteca</button>
+                        <button class="community-item" onclick="addToCommunity('mercado')">🛒 Mercado</button>
+                    </div>
+                    <div id="community-container" style="margin-top: 20px; min-height: 100px; border: 2px dashed #ccc; padding: 15px; border-radius: 10px; background: #f8f9fa;">
+                        <p>Tu comunidad aparecerá aquí...</p>
+                    </div>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button class="puzzle-btn" onclick="resetCommunity()">Reiniciar Comunidad</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de juegos -->
+        <section id="juegos">
+            <h2><i class="fas fa-dice"></i> Juegos Educativos</h2>
+            
+            <div class="activities-container">
+                <div class="activity">
+                    <h3>Memoria de Símbolos Patrios</h3>
+                    <p>Encuentra las parejas de nuestros símbolos patrios:</p>
+                    <div class="memory-game" id="memory-game">
+                        <!-- Las cartas se generarán con JavaScript -->
+                    </div>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button class="puzzle-btn" onclick="resetMemoryGame()">Reiniciar Juego</button>
+                        <p id="memory-score">Parejas encontradas: 0/6</p>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <h3>Rompecabezas de Machu Picchu</h3>
+                    <p>Arrastra las piezas para completar la imagen de Machu Picchu:</p>
+                    <div id="puzzle-container" class="puzzle-container">
+                        <!-- Las piezas del rompecabezas se generarán con JavaScript -->
+                    </div>
+                    <div class="puzzle-controls">
+                        <button class="puzzle-btn" onclick="shufflePuzzle()">Mezclar Piezas</button>
+                        <button class="puzzle-btn" onclick="checkPuzzle()">Verificar</button>
+                        <button class="puzzle-btn" onclick="solvePuzzle()">Resolver</button>
+                    </div>
+                    <p id="puzzle-message" style="text-align: center; margin-top: 15px; font-weight: bold;"></p>
+                </div>
+                
+                <div class="activity">
+                    <h3>Relaciona los Símbolos</h3>
+                    <p>Arrastra cada símbolo a su descripción correcta:</p>
+                    <div class="drag-drop-container">
+                        <div class="drag-items">
+                            <div class="drag-item" draggable="true" data-target="bandera">🇵🇪 Bandera</div>
+                            <div class="drag-item" draggable="true" data-target="escudo">🛡️ Escudo</div>
+                            <div class="drag-item" draggable="true" data-target="himno">🎵 Himno Nacional</div>
+                        </div>
+                        <div class="drop-zones">
+                            <div class="drop-zone" data-target="bandera">Rojo, blanco y rojo</div>
+                            <div class="drop-zone" data-target="escudo">Tiene una vicuña, un árbol y una cornucopia</div>
+                            <div class="drop-zone" data-target="himno">"Somos libres, seámoslo siempre"</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button class="puzzle-btn" onclick="checkDragDrop()">Verificar Respuestas</button>
+                        <button class="puzzle-btn" onclick="resetDragDrop()">Reiniciar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de recursos -->
+        <section id="recursos">
+            <h2><i class="fas fa-download"></i> Recursos Educativos</h2>
+            
+            <div class="cards-container">
+                <div class="card">
+                    <h3><span class="card-icon">📖</span> Cuentos y Leyendas</h3>
+                    <p>Recopilación de cuentos y leyendas tradicionales que forman parte de nuestra cultura.</p>
+                    <button class="card-btn" onclick="downloadResource('cuentos')">Descargar</button>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="card-icon">🎬</span> Videos Educativos</h3>
+                    <p>Videos sobre historia, geografía y valores para complementar tu aprendizaje.</p>
+                    <button class="card-btn" onclick="showVideos()">Ver videos</button>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="card-icon">🖨️</span> Material Descargable</h3>
+                    <p>Fichas, láminas y actividades para imprimir y trabajar en casa.</p>
+                    <button class="card-btn" onclick="downloadResource('material')">Descargar</button>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="card-icon">📋</span> Evaluaciones</h3>
+                    <p>Pruebas y evaluaciones para medir tu aprendizaje en el curso.</p>
+                    <button class="card-btn" onclick="downloadResource('evaluaciones')">Descargar</button>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="card-icon">🎨</span> Actividades Creativas</h3>
+                    <p>Manualidades y proyectos creativos relacionados con los temas del curso.</p>
+                    <button class="card-btn" onclick="downloadResource('actividades')">Descargar</button>
+                </div>
+                
+                <div class="card">
+                    <h3><span class="card-icon">🔍</span> Proyectos de Investigación</h3>
+                    <p>Guías para realizar pequeños proyectos de investigación sobre temas sociales.</p>
+                    <button class="card-btn" onclick="downloadResource('proyectos')">Descargar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de galería -->
+        <section id="galeria">
+            <h2><i class="fas fa-images"></i> Galería de Nuestro País</h2>
+            <p>Conoce las maravillas de nuestro país a través de estas imágenes:</p>
+            
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://image-tc.galaxy.tf/wijpeg-7ellqz2uqv2l9plk30futx9jr/experiencias-machu-picchu_wide.jpg?crop=0%2C63%2C1200%2C675" alt="Machu Picchu">
+                    <div class="gallery-overlay">
+                        <h4>Machu Picchu</h4>
+                        <p>Antigua ciudadela inca en las montañas</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://blog.viajesmachupicchu.travel/wp-content/uploads/2025/03/playas-del-sur-relax-portada-1170x550.jpg" alt="Playas">
+                    <div class="gallery-overlay">
+                        <h4>Hermosas Playas</h4>
+                        <p>Nuestras costas tienen playas espectaculares</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/0a/a8/57/photo4jpg.jpg?w=500&h=-1&s=1" alt="Montañas">
+                    <div class="gallery-overlay">
+                        <h4>Cordillera de los Andes</h4>
+                        <p>Impresionantes montañas que recorren nuestro país</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/14/22/18/beach-1824855_1280.jpg" alt="Playas del norte">
+                    <div class="gallery-overlay">
+                        <h4>Playas del Norte</h4>
+                        <p>Agua cálida y sol durante todo el año</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://www.caminosalkantay.com/blog/wp-content/uploads/2025/07/La-Selva-de-Peru.jpg" alt="Selva">
+                    <div class="gallery-overlay">
+                        <h4>Selva Amazónica</h4>
+                        <p>Pulmón del planeta lleno de biodiversidad</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://www.latintrails.com/wp-content/uploads/2019/01/Ollantaytambo-Ruins-Peru1.jpg" alt="Ruinas históricas">
+                    <div class="gallery-overlay">
+                        <h4>Chan Chan</h4>
+                        <p>Ciudad de barro más grande de América</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://www.intupacusco.com/wp-content/uploads/2020/04/Lago-Titicaca-Peru.jpg" alt="Lago Titicaca">
+                    <div class="gallery-overlay">
+                        <h4>Lago Titicaca</h4>
+                        <p>El lago navegable más alto del mundo</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://www.peru.travel/Contenido/Experiencia/Imagen/es/67/1.1/Visita%20al%20canon%20del%20colca.jpg" alt="Cañón del Colca">
+                    <div class="gallery-overlay">
+                        <h4>Cañón del Colca</h4>
+                        <p>Uno de los cañones más profundos del mundo</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="card-btn" onclick="showMoreImages()">Ver más imágenes</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal para contenido -->
+    <div class="modal" id="contentModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('contentModal')">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Modal para videos -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('videoModal')">&times;</span>
+            <h2>Videos Educativos</h2>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 20px;">
+                <div class="video-item">
+                    <h3>Nuestros Símbolos Patrios</h3>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/watch?v=dEMPjKFbFBM" title="Símbolos Patrios del Perú" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <h3>La Historia del Perú</h3>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/watch?v=ycWu_zxgOXM" title="Historia del Perú" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <h3>Cuidando Nuestro Medio Ambiente</h3>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/watch?v=nvUqnpicSd0" title="Cuidado del Medio Ambiente" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Personal Social - Nivel Primaria</h3>
+                <p>© 2025 - Diseñado para el aprendizaje divertido de niños y niñas</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+       <script src="script.js"></script>
+</body>
+</html>

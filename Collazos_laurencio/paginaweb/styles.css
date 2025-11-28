@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+.header {
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.hero {
+    text-align: center;
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.4;
+    margin-bottom: 40px;
+}
+
+.highlight {
+    font-weight: bold;
+    background: linear-gradient(45deg, #ffd700, #ff6b6b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.divider {
+    width: 100px;
+    height: 3px;
+    background: white;
+    margin: 30px auto;
+    border-radius: 2px;
+}
+
+.login-btn {
+    background: linear-gradient(45deg, #ff6b6b, #ffd700);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.login-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav {
+        gap: 15px;
+    }
+    
+    .nav-link {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .login-btn {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
+}
